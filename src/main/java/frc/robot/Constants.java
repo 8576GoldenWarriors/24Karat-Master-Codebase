@@ -23,9 +23,7 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
   public static final int PDH_ID = 0;
 
-  public static class IOConstants {
-    public static final int DRIVER_CONTROLLER_PORT = 0;
-  }
+
 
   public static final class SwerveConstants{
     //Drivetrain motor/encoder IDs
@@ -93,5 +91,52 @@ public final class Constants {
         new Translation2d(-WHEEL_BASE / 2, TRACK_WIDTH / 2),
         new Translation2d(-WHEEL_BASE / 2, -TRACK_WIDTH / 2)
     );
+  }
+
+
+
+
+  public static class ControllerConstants {
+    public static final int kDriverControllerPort = 1;
+    public static final int kOperatorControllerPort = 0;
+  }
+
+  public static class IntakeConstants{
+    public static final int IntakeSensorID = 0;
+
+    public static final int rollerCANSparkID = 15;
+    public static final int pivotCANSparkID = 13;
+
+    public static final double kRollerInSpeed = -0.50;
+    public static final double kRollerOutSpeed = 0.65;
+    
+    public static final double kArmUpSpeed = 0.2;
+    public static final double kArmDownSpeed = -0.2;
+
+    public static final double kDownPosition = 10;
+    public static final double kUpPosition = 1;
+
+  }
+
+  public static class ShooterConstants{
+    public static final int leftCANSparkID = 26;
+    public static final int rightCANSparkID = 25;
+    
+    public static final double kShooterSpeed = 1.0;
+  }
+
+  public static class ClimberConstants{
+    public static final int leftCANSparkID = 31;
+    public static final int rightCANSparkID = 32;
+
+    public static final double kClimberSpeed = 0.05;
+
+  }
+
+  public static class TransportConstants {
+    public static final int leftCANSparkID = 16;
+    public static final int rightCANSparkID = 17;
+
+    public static final double kTransportSpeed = 0.85;
   }
 }

@@ -4,19 +4,23 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.math.controller.BangBangController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Shooter;
 
-public class SwerveDrive extends Command {
-  private Drivetrain drivetrain = Drivetrain.getInstance();
+public class Shoot extends Command {
+  public Shooter Shooter;
+  /** Creates a new Shoot. */
 
-  /** Creates a new SwerveDrive. */
-  public SwerveDrive() {
+  public BangBangController controller = new BangBangController();
+
+  public Shoot(Shooter Shooter) {
+    this.Shooter = Shooter;
+
+    addRequirements(Shooter);
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(drivetrain);
   }
 
   // Called when the command is initially scheduled.
@@ -26,24 +30,20 @@ public class SwerveDrive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.drivetrain.swerveDrive(
-      -RobotContainer.driverController.getLeftY(), 
-      -RobotContainer.driverController.getLeftX(), 
-      -RobotContainer.driverController.getRightX(),
-      !RobotContainer.driverController.getHID().getRawButton(XboxController.Button.kB.value),
-      new Translation2d(),
-      true);
+    Shooter.setSpeed(Constants.ShooterConstants.kShooterSpeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.drivetrain.stopModules();
+    Shooter.setSpeed(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    
+    return (RobotContainer.operatorController.getHID().getBButtonPressed()) ? true : false;
+
   }
 }

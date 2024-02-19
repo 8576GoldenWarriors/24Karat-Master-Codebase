@@ -4,19 +4,22 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.Drivetrain;
+import edu.wpi.first.math.controller.BangBangController;
+import frc.robot.Constants;
+import frc.robot.subsystems.Climber;
 
-public class SwerveDrive extends Command {
-  private Drivetrain drivetrain = Drivetrain.getInstance();
+public class ClimbDown extends Command {
+  public Climber Climber;
+  /** Creates a new ClimbDown. */
 
-  /** Creates a new SwerveDrive. */
-  public SwerveDrive() {
+  public BangBangController controller = new BangBangController();
+
+  public ClimbDown(Climber Climber) {
+    this.Climber = Climber;
+
+    addRequirements(Climber);
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(drivetrain);
   }
 
   // Called when the command is initially scheduled.
@@ -26,24 +29,20 @@ public class SwerveDrive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.drivetrain.swerveDrive(
-      -RobotContainer.driverController.getLeftY(), 
-      -RobotContainer.driverController.getLeftX(), 
-      -RobotContainer.driverController.getRightX(),
-      !RobotContainer.driverController.getHID().getRawButton(XboxController.Button.kB.value),
-      new Translation2d(),
-      true);
+    Climber.setSpeed(-controller.calculate(Constants.ClimberConstants.kClimberSpeed));
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.drivetrain.stopModules();
+    Climber.setSpeed(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+
     return false;
+    
   }
 }
