@@ -100,6 +100,7 @@ public final class Constants {
     );
   }
 
+
   public static class IntakeConstants{
     public static final int IntakeSensorID = 0;
 
@@ -117,12 +118,14 @@ public final class Constants {
 
   }
 
+
   public static class ShooterConstants{
     public static final int leftCANSparkID = 26;
     public static final int rightCANSparkID = 25;
     
-    public static final double kShooterSpeed = 1.0;
+    public static final double kShooterSpeed = 0.6;
   }
+
 
   public static class ClimberConstants{
     public static final int leftCANSparkID = 31;
@@ -131,6 +134,7 @@ public final class Constants {
     public static final double kClimberSpeed = 0.05;
 
   }
+
 
   public static class TransportConstants {
     public static final int leftCANSparkID = 16;
