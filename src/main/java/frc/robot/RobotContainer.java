@@ -8,7 +8,12 @@ import frc.robot.Constants.IOConstants;
 import frc.robot.commands.SwerveDrive;
 import frc.robot.subsystems.Drivetrain;
 
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
+
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -30,11 +35,20 @@ public class RobotContainer {
   public static final XboxController driverController = new XboxController(IOConstants.DRIVER_CONTROLLER_PORT);
   private final JoystickButton resetHeading_Start = new JoystickButton(driverController, XboxController.Button.kStart.value);
 
+  private final SendableChooser<Command> autoChooser;
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+
+    registerNamedCommands();
+
     configureBindings();
 
     drivetrain.setDefaultCommand(new SwerveDrive());
+
+    autoChooser = AutoBuilder.buildAutoChooser();
+
+    SmartDashboard.putData("AutoChooser", autoChooser);
   }
 
   /**
@@ -60,6 +74,10 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new WaitCommand(10);
+    return autoChooser.getSelected();
+  }
+
+  public void registerNamedCommands(){
+    NamedCommands.registerCommand("StopModules", new InstantCommand(() -> drivetrain.stopModules()));
   }
 }

@@ -7,14 +7,19 @@ package frc.robot.subsystems;
 import java.text.DecimalFormat;
 
 import com.ctre.phoenix6.hardware.Pigeon2;
+import com.pathplanner.lib.auto.AutoBuilder;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.Odometry;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.SwerveConstants;
@@ -60,6 +65,8 @@ public class Drivetrain extends SubsystemBase {
 
   private static final Drivetrain drivetrain = new Drivetrain();
 
+  public SwerveDriveOdometry odometry = new SwerveDriveOdometry(SwerveConstants.DRIVE_KINEMATICS, getHeadingRotation2d(), getModulePositions(), new Pose2d());
+
   public static Drivetrain getInstance(){
     return drivetrain;
   }
@@ -73,6 +80,16 @@ public class Drivetrain extends SubsystemBase {
       }
       catch(Exception e){}
     }).start();
+
+    AutoBuilder.configureHolonomic(
+      this::getPose2d,
+      this::resetPose2d,
+      this::getRobotRelativeSpeeds,
+      this::driveRobotRelative,
+      SwerveConstants.AUTO_CONFIG,
+      () -> isRedAlliance(),
+      this
+    );
   }
 
   @Override
@@ -90,6 +107,8 @@ public class Drivetrain extends SubsystemBase {
     // Logger.recordOutput("Pose", getPose().toString());
     // Logger.recordOutput("Angular Speed", new DecimalFormat("#.00").format((yaw / 180)) + "pi rad/s" );
 
+    SmartDashboard.putString("Pose", getPose2d().toString());
+
     //new values
     SmartDashboard.putNumber("Left Front Module Velocity", leftFront.getDriveMotorVelocity());
     SmartDashboard.putNumber("Right Front Module Velocity", rightFront.getDriveMotorVelocity());
@@ -105,6 +124,8 @@ public class Drivetrain extends SubsystemBase {
     // Logger.recordOutput("Drivetrain/Pose", getPose());
     // Logger.recordOutput("Drivetrain/Angular Speed", yaw / 180);
     // Logger.recordOutput("Drivetrain/Module States", getModuleStates());
+
+    odometry.update(getHeadingRotation2d(), getModulePositions());
   }
 
   public void swerveDrive(double frontSpeed, double sideSpeed, double turnSpeed, 
@@ -211,4 +232,28 @@ public class Drivetrain extends SubsystemBase {
     positions[3] = rightBack.getPosition();
     return positions;
   } 
+
+  public Pose2d getPose2d(){
+    return odometry.getPoseMeters();
+  }
+
+  public void resetPose2d(Pose2d pose){
+    odometry.resetPosition(getHeadingRotation2d(), getModulePositions(), pose);
+  }
+
+  public ChassisSpeeds getRobotRelativeSpeeds(){
+    return SwerveConstants.DRIVE_KINEMATICS.toChassisSpeeds(getModuleStates());
+  }
+
+  public void driveRobotRelative(ChassisSpeeds chassisSpeeds){
+    SwerveModuleState[] moduleStates = SwerveConstants.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
+    setModuleStates(moduleStates);
+  }
+
+  public boolean isRedAlliance(){
+    if (DriverStation.getAlliance().isPresent()){
+      return DriverStation.getAlliance().get() == DriverStation.Alliance.Red;
+    }
+    return false;
+  }
 }

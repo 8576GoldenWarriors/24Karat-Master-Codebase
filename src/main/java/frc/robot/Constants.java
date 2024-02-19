@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
+import com.pathplanner.lib.util.PIDConstants;
+import com.pathplanner.lib.util.ReplanningConfig;
+
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.util.Units;
@@ -67,9 +71,22 @@ public final class Constants {
     public static final double TELE_DRIVE_MAX_ACCELERATION = 2; //3
     public static final double TELE_DRIVE_MAX_ANGULAR_ACCELERATION = 12; //3
 
-    //Swerve Kinematics
+    public static final double AUTO_KP_TTANSLATION = 1.3;
+    public static final double AUTO_KP_ROTATIONAL = 0.4;
+
     public static final double TRACK_WIDTH = Units.inchesToMeters(23.875);
     public static final double WHEEL_BASE = Units.inchesToMeters(23.875);
+    public static final double DRIVE_BASE_RADIUS = Math.sqrt((Math.pow(TRACK_WIDTH, 2) + Math.pow(WHEEL_BASE, 2))) / 2.0;
+
+    public static final HolonomicPathFollowerConfig AUTO_CONFIG = new HolonomicPathFollowerConfig(
+      new PIDConstants(AUTO_KP_TTANSLATION, 0, 0),
+      new PIDConstants(AUTO_KP_ROTATIONAL, 0, 0),
+      DRIVETRAIN_MAX_SPEED,
+      DRIVE_BASE_RADIUS,
+      new ReplanningConfig()
+    );
+
+    //Swerve Kinematics
     public static final SwerveDriveKinematics DRIVE_KINEMATICS = new SwerveDriveKinematics(
         new Translation2d(WHEEL_BASE / 2, TRACK_WIDTH / 2),
         new Translation2d(WHEEL_BASE / 2, -TRACK_WIDTH / 2),
