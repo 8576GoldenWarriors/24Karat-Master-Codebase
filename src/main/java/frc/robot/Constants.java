@@ -25,6 +25,13 @@ public final class Constants {
 
 
 
+  public static class ControllerConstants {
+    public static final int kDriverControllerPort = 0;
+    public static final int kOperatorControllerPort = 1;
+  }
+
+
+
   public static final class SwerveConstants{
     //Drivetrain motor/encoder IDs
     public static final int LEFT_FRONT_DRIVE_ID = 7;
@@ -91,14 +98,6 @@ public final class Constants {
         new Translation2d(-WHEEL_BASE / 2, TRACK_WIDTH / 2),
         new Translation2d(-WHEEL_BASE / 2, -TRACK_WIDTH / 2)
     );
-  }
-
-
-
-
-  public static class ControllerConstants {
-    public static final int kDriverControllerPort = 1;
-    public static final int kOperatorControllerPort = 0;
   }
 
   public static class IntakeConstants{
