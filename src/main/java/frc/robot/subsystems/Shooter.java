@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -14,19 +15,28 @@ import frc.robot.Constants;
 public class Shooter extends SubsystemBase {
   private CANSparkMax leftMotor; 
   private CANSparkMax rightMotor;
+
+  private CANSparkMax pivotMotor;
   //private CANSparkMax pivotMotor; not implemented yet
 
   /** Creates a new Shooter. */
   public Shooter() {
     leftMotor = new CANSparkMax(Constants.ShooterConstants.leftCANSparkID, MotorType.kBrushless);
     rightMotor = new CANSparkMax(Constants.ShooterConstants.rightCANSparkID, MotorType.kBrushless);
+
+    pivotMotor = new CANSparkMax(Constants.ShooterConstants.pivotCANSparkID, MotorType.kBrushless);
+    pivotMotor.setIdleMode(IdleMode.kBrake);
   }
 
 
   public void setSpeed(double speed){
     //ASSUMING RIGHT MOTOR NEEDS TO SPIN IN NEGATIVE DIRECTION
     leftMotor.set(-speed);
-    rightMotor.set(-speed);
+    rightMotor.set(speed);
+  }
+
+  public void setPivotSpeed(double speed){
+    pivotMotor.set(speed);
   }
 
   public double getLeftMotorVoltage(){
@@ -35,6 +45,10 @@ public class Shooter extends SubsystemBase {
 
   public double getRightMotorVoltage(){
     return rightMotor.getBusVoltage();
+  }
+
+  public double getPivotMotorVoltage(){
+    return pivotMotor.getBusVoltage();
   }
 
   public RelativeEncoder getLeftEncoder() {

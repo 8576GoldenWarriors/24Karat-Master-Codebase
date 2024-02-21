@@ -23,7 +23,7 @@ public class IntakeUp extends Command {
   double avgPos;
   double motorPower;
 
-  Boolean done = false;
+  boolean done = false;
 
   public IntakeUp(Intake intake) {
     this.intake = intake;
@@ -34,18 +34,18 @@ public class IntakeUp extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // setpoint = Constants.IntakeConstants.kUpPosition;
-    // kP = 0.07;
-    // Ki = 0;
-    // Kd = 0.01;
-    // lastError = 0;
-    // integral = 0;
-    // derivative = 0;
-    // avgPos = intake.getArmEncoder().getPosition();
-    // motorPower = 0;
+    setpoint = Constants.IntakeConstants.kUpPosition;
+    kP = 0.07;
+    Ki = 0;
+    Kd = 0.01;
+    lastError = 0;
+    integral = 0;
+    derivative = 0;
+    avgPos = intake.getArmEncoder().getPosition();
+    motorPower = 0;
 
-    // error = setpoint - avgPos;
-    // integral = 0;
+    error = setpoint - avgPos;
+    integral = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -59,17 +59,14 @@ public class IntakeUp extends Command {
     //   derivative =  error - lastError;
     //   motorPower = (kP * error) + (Ki * integral) + (Kd * derivative);
 
-    //   if (motorPower > 0.65) {
-    //     motorPower = 0.65;
+    //   if (motorPower > 0.4) {
+    //     motorPower = 0.4;
     //   }
 
-    //   if (motorPower < 0.20) {
+    //   if (motorPower < 0.1) {
     //     motorPower = 0;
     //   }
 
-    //   if (setpoint < 0) {
-    //     motorPower = -motorPower;
-    //   }
 
     //   if (motorPower == 0) {
     //     done = true;
@@ -94,9 +91,16 @@ public class IntakeUp extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if(done){
+      return true;
+    }
     if (intake.getArmVoltage()>15){
       return true;
     }
+    // if(intake.getDigitalInput().get()==true){
+    //   return true;
+    // }
+    
     return false;
   }
 }

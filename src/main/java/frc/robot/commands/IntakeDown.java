@@ -11,41 +11,40 @@ import frc.robot.subsystems.Intake;
 public class IntakeDown extends Command {
   public Intake intake;
 
-  // double setpoint;
-  // double kP;
-  // double Ki;
-  // double Kd;
-  // double error;
-  // double lastError;
-  // double integral;
-  // double derivative;
-  // double avgPos;
-  // double motorPower;
+  double setpoint;
+  double kP;
+  double Ki;
+  double Kd;
+  double error;
+  double lastError;
+  double integral;
+  double derivative;
+  double avgPos;
+  double motorPower;
 
-  // Boolean done = false;
+  Boolean done = false;
 
   public IntakeDown(Intake intake) {
     this.intake = intake;
 
     addRequirements(intake);
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // setpoint = Constants.IntakeConstants.kDownPosition;
-    // kP = 0.07;
-    // Ki = 0;
-    // Kd = 0.01;
-    // lastError = 0;
-    // integral = 0;
-    // derivative = 0;
-    // avgPos = intake.getArmEncoder().getPosition();
-    // motorPower = 0;
+    setpoint = Constants.IntakeConstants.kDownPosition;
+    kP = 0.07;
+    Ki = 0;
+    Kd = 0.01;
+    lastError = 0;
+    integral = 0;
+    derivative = 0;
+    avgPos = intake.getArmEncoder().getPosition();
+    motorPower = 0;
 
-    // error = setpoint - avgPos;
-    // integral = 0;
+    error = setpoint - avgPos;
+    integral = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -58,16 +57,12 @@ public class IntakeDown extends Command {
     //   derivative = error - lastError;
     //   motorPower = (kP * error) + (Ki * integral) + (Kd * derivative);
 
-    //   if (motorPower > 0.65) {
-    //     motorPower = 0.65;
+    //   if (motorPower > 0.4) {
+    //     motorPower = 0.4;
     //   }
 
-    //   if (motorPower < 0.20) {
+    //   if (motorPower < 0.1) {
     //     motorPower = 0;
-    //   }
-
-    //   if (setpoint < 0) {
-    //     motorPower = -motorPower;
     //   }
 
     //   if (motorPower == 0) {
@@ -93,9 +88,12 @@ public class IntakeDown extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    //if (done) {
-    //   return true;
-    // }
+    if (done) {
+      return true;
+    }
+    if(intake.getArmVoltage()>15){
+      return true;
+    }
 
     return false;
 

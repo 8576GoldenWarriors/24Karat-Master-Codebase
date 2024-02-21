@@ -36,12 +36,12 @@ public final class Constants {
     //Drivetrain motor/encoder IDs
     public static final int LEFT_FRONT_DRIVE_ID = 7;
     public static final int RIGHT_FRONT_DRIVE_ID = 1;
-    public static final int LEFT_BACK_DRIVE_ID = 4;
+    public static final int LEFT_BACK_DRIVE_ID = 4; //5 on comp bot
     public static final int RIGHT_BACK_DRIVE_ID = 3;
     
     public static final int LEFT_FRONT_TURN_ID = 6;
     public static final int RIGHT_FRONT_TURN_ID = 8;
-    public static final int LEFT_BACK_TURN_ID = 5;
+    public static final int LEFT_BACK_TURN_ID = 5; //4 on comp bot
     public static final int RIGHT_BACK_TURN_ID = 2;
     
     public static final int LEFT_FRONT_CANCODER_ID = 2;
@@ -53,10 +53,10 @@ public final class Constants {
 
     //Drivetrain characteristics
 
-    public static final double LEFT_FRONT_OFFSET = 0.500488;//329.941;//293.467; //1;//293.467;//327;//abs 329.941 Id: 2
-    public static final double RIGHT_FRONT_OFFSET = 0.906982;//230.625;//160.576;//249;//160.576;// 55;//230.625 Id: 4
-    public static final double LEFT_BACK_OFFSET = 0.540283;//274.685;//357.848;//357.848;//186.152;//272;//abs 274.685 Id: 1
-    public static final double RIGHT_BACK_OFFSET = 0.737305;//30.3468;//258.926;//66.357;//101.643;//66.357;//264;//258.926 Id: 3
+    public static final double LEFT_FRONT_OFFSET = 0.500488;
+    public static final double RIGHT_FRONT_OFFSET = 0.906982;
+    public static final double LEFT_BACK_OFFSET = 0.540283;
+    public static final double RIGHT_BACK_OFFSET = 0.737305;
 
     public static final double WHEEL_DIAMETER = Units.inchesToMeters(3.5); //originally 4 in template
     public static final double DRIVE_MOTOR_GEAR_RATIO = 6.75;
@@ -110,8 +110,8 @@ public final class Constants {
     public static final double kRollerInSpeed = -0.50;
     public static final double kRollerOutSpeed = 0.65;
     
-    public static final double kArmUpSpeed = 0.2;
-    public static final double kArmDownSpeed = -0.2;
+    public static final double kArmUpSpeed = 0.5;
+    public static final double kArmDownSpeed = -0.45;
 
     public static final double kDownPosition = 10;
     public static final double kUpPosition = 1;
@@ -122,14 +122,22 @@ public final class Constants {
   public static class ShooterConstants{
     public static final int leftCANSparkID = 26;
     public static final int rightCANSparkID = 25;
-    
-    public static final double kShooterSpeed = 0.6;
+
+    public static final double kShooterSpeed = 0.75;
+    public static final double kShintakeSpeed = -0.1;
+
+
+
+    public static final int pivotCANSparkID = 11;
+
+    public static final double kPivotUpSpeed = 0.2;
+    public static final double kPivotDownSpeed = -0.1;
   }
 
 
   public static class ClimberConstants{
-    public static final int leftCANSparkID = 31;
-    public static final int rightCANSparkID = 32;
+    public static final int leftCANSparkID = 12;
+    public static final int rightCANSparkID = 14;
 
     public static final double kClimberSpeed = 0.05;
 

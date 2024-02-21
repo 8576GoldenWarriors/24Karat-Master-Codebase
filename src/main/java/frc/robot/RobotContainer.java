@@ -10,7 +10,10 @@ import frc.robot.commands.IntakeDown;
 import frc.robot.commands.IntakeIn;
 import frc.robot.commands.IntakeOut;
 import frc.robot.commands.IntakeUp;
+import frc.robot.commands.Shintake;
 import frc.robot.commands.Shoot;
+import frc.robot.commands.ShooterDown;
+import frc.robot.commands.ShooterUp;
 import frc.robot.commands.SwerveDrive;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
@@ -52,9 +55,9 @@ public class RobotContainer {
     configureBindings();
 
     drivetrain.setDefaultCommand(new SwerveDrive());
-
+   //Add all the choise of Autonomous modes to the Smart Dashboard
     autoChooser = AutoBuilder.buildAutoChooser();
-
+  
     SmartDashboard.putData("AutoChooser", autoChooser);
   }
 
@@ -73,7 +76,8 @@ public class RobotContainer {
 
     //Shooter
     operatorController.y().onTrue(new Shoot(m_Shooter)); //b button ends shoot command, defined in shoot command
-    //operatorController.y().whileTrue(new Shoot(m_Shooter));  
+    //Shintake
+    operatorController.povDown().whileTrue(new Shintake(m_Shooter));
     
     //Climber
     //Window button is button #7. Retracts the climber.
@@ -87,6 +91,13 @@ public class RobotContainer {
     operatorController.x().and(operatorController.leftBumper()).whileTrue( new IntakeDown(m_Intake) );
     //operatorController.a().and(operatorController.leftBumper()).onTrue(new IntakeUp(m_Intake));
     //operatorController.x().and(operatorController.leftBumper()).onTrue(new IntakeDown(m_Intake));
+
+    //test code for shooter pivot
+    operatorController.b().and(operatorController.leftBumper()).whileTrue( new ShooterDown(m_Shooter));
+    operatorController.y().and(operatorController.leftBumper()).whileTrue( new ShooterUp(m_Shooter));
+
+
+    
      
   }
 

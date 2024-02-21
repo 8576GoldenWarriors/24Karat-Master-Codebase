@@ -14,7 +14,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.math.kinematics.Odometry;
+//import edu.wpi.first.math.kinematics.Odometry;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
@@ -208,12 +208,12 @@ public class Drivetrain extends SubsystemBase {
     rightBack.setDesiredState(moduleStates[3]);
   }
 
-  public void setModuleZero(){
-    leftFront.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(0)));
-    rightFront.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(0)));
-    leftBack.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(0)));
-    rightBack.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(0)));
-  }
+  // public void setModuleZero(){ Not Called Anywhere
+  //   leftFront.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(0)));
+  //   rightFront.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(0)));
+  //   leftBack.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(0)));
+  //   rightBack.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(0)));
+  // }
 
   public SwerveModuleState[] getModuleStates(){
     SwerveModuleState[] states = new SwerveModuleState[4];
