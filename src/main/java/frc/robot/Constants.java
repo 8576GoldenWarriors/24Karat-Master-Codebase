@@ -54,7 +54,7 @@ public final class Constants {
     //Drivetrain characteristics
 
     public static final double LEFT_FRONT_OFFSET = 0.500488;
-    public static final double RIGHT_FRONT_OFFSET = 0.906982;
+    public static final double RIGHT_FRONT_OFFSET = 0.906982; //0.4873046875; 
     public static final double LEFT_BACK_OFFSET = 0.540283;
     public static final double RIGHT_BACK_OFFSET = 0.737305;
 
