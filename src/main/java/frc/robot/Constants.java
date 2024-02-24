@@ -23,6 +23,13 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
   public static final int PDH_ID = 0;
 
+  boolean isPractice = false;
+
+  public Constants(){
+    checkPracticeMode(isPractice);
+  }
+
+
 
 
   public static class ControllerConstants {
@@ -36,12 +43,12 @@ public final class Constants {
     //Drivetrain motor/encoder IDs
     public static final int LEFT_FRONT_DRIVE_ID = 7;
     public static final int RIGHT_FRONT_DRIVE_ID = 1;
-    public static final int LEFT_BACK_DRIVE_ID = 4; //5 on comp bot
+    public static  int LEFT_BACK_DRIVE_ID = 5; //4 on practice bot
     public static final int RIGHT_BACK_DRIVE_ID = 3;
     
     public static final int LEFT_FRONT_TURN_ID = 6;
     public static final int RIGHT_FRONT_TURN_ID = 8;
-    public static final int LEFT_BACK_TURN_ID = 5; //4 on comp bot
+    public static  int LEFT_BACK_TURN_ID = 4; //5 on practice bot
     public static final int RIGHT_BACK_TURN_ID = 2;
     
     public static final int LEFT_FRONT_CANCODER_ID = 2;
@@ -53,10 +60,11 @@ public final class Constants {
 
     //Drivetrain characteristics
 
-    public static final double LEFT_FRONT_OFFSET = 0.500488;
-    public static final double RIGHT_FRONT_OFFSET = 0.906982; //0.4873046875; 
-    public static final double LEFT_BACK_OFFSET = 0.540283;
-    public static final double RIGHT_BACK_OFFSET = 0.737305;
+    public static  double LEFT_FRONT_OFFSET = 0.33154298675; //0.500488;
+    public static  double RIGHT_FRONT_OFFSET = -0.142822265625; //0.906982;  
+    public static  double LEFT_BACK_OFFSET = 0.483642578125; //0.540283;
+    public static  double RIGHT_BACK_OFFSET = 0.27880859375; //0.737305;
+
 
     public static final double WHEEL_DIAMETER = Units.inchesToMeters(3.5); //originally 4 in template
     public static final double DRIVE_MOTOR_GEAR_RATIO = 6.75;
@@ -91,6 +99,7 @@ public final class Constants {
       new ReplanningConfig()
     );
 
+
     //Swerve Kinematics
     public static final SwerveDriveKinematics DRIVE_KINEMATICS = new SwerveDriveKinematics(
         new Translation2d(WHEEL_BASE / 2, TRACK_WIDTH / 2),
@@ -98,6 +107,7 @@ public final class Constants {
         new Translation2d(-WHEEL_BASE / 2, TRACK_WIDTH / 2),
         new Translation2d(-WHEEL_BASE / 2, -TRACK_WIDTH / 2)
     );
+
   }
 
 
@@ -120,7 +130,7 @@ public final class Constants {
 
 
   public static class ShooterConstants{
-    public static final int leftCANSparkID = 26;
+    public static final int leftCANSparkID = 26; //make negative
     public static final int rightCANSparkID = 25;
 
     public static final double kShooterSpeed = 0.75;
@@ -149,5 +159,19 @@ public final class Constants {
     public static final int rightCANSparkID = 17;
 
     public static final double kTransportSpeed = 0.85;
+  }
+
+
+  public void checkPracticeMode(boolean isPractice){
+    if(isPractice){
+      SwerveConstants.LEFT_BACK_DRIVE_ID = 4;
+      SwerveConstants.LEFT_BACK_TURN_ID = 5;
+
+      SwerveConstants.LEFT_FRONT_OFFSET =  0.500488;
+      SwerveConstants.RIGHT_FRONT_OFFSET = 0.906982; 
+      SwerveConstants.LEFT_BACK_OFFSET = 0.540283;
+      SwerveConstants.RIGHT_BACK_OFFSET = 0.737305;
+    }
+
   }
 }
