@@ -23,11 +23,11 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
   public static final int PDH_ID = 0;
 
-  boolean isPractice = false;
+  // boolean isPractice = false;
 
-  public Constants(){
-    checkPracticeMode(isPractice);
-  }
+  // public Constants(){
+  //   checkPracticeMode(isPractice);
+  // }
 
 
 
@@ -41,15 +41,30 @@ public final class Constants {
 
   public static final class SwerveConstants{
     //Drivetrain motor/encoder IDs
-    public static final int LEFT_FRONT_DRIVE_ID = 7;
-    public static final int RIGHT_FRONT_DRIVE_ID = 1;
-    public static  int LEFT_BACK_DRIVE_ID = 5; //4 on practice bot
-    public static final int RIGHT_BACK_DRIVE_ID = 3;
+
+    //PRACTICE IDS
+    // public static final int LEFT_FRONT_DRIVE_ID = 7;
+    // public static final int RIGHT_FRONT_DRIVE_ID = 1;
+    // public static  final int LEFT_BACK_DRIVE_ID = 4;
+    // public static final int RIGHT_BACK_DRIVE_ID = 3;
     
-    public static final int LEFT_FRONT_TURN_ID = 6;
-    public static final int RIGHT_FRONT_TURN_ID = 8;
-    public static  int LEFT_BACK_TURN_ID = 4; //5 on practice bot
-    public static final int RIGHT_BACK_TURN_ID = 2;
+    // public static final int LEFT_FRONT_TURN_ID = 6;
+    // public static final int RIGHT_FRONT_TURN_ID = 8;
+    // public static  final int LEFT_BACK_TURN_ID = 5; 
+    // public static final int RIGHT_BACK_TURN_ID = 2;
+
+
+    //COMPETITION IDS
+
+     public static final int LEFT_FRONT_DRIVE_ID = 7;
+     public static final int RIGHT_FRONT_DRIVE_ID = 1;
+     public static  int LEFT_BACK_DRIVE_ID = 5;
+     public static final int RIGHT_BACK_DRIVE_ID = 3;
+    
+     public static final int LEFT_FRONT_TURN_ID = 6;
+     public static final int RIGHT_FRONT_TURN_ID = 8;
+     public static  int LEFT_BACK_TURN_ID = 4; 
+     public static final int RIGHT_BACK_TURN_ID = 2;
     
     public static final int LEFT_FRONT_CANCODER_ID = 2;
     public static final int RIGHT_FRONT_CANCODER_ID = 4;
@@ -60,11 +75,17 @@ public final class Constants {
 
     //Drivetrain characteristics
 
-    public static  double LEFT_FRONT_OFFSET = 0.33154298675; //0.500488;
-    public static  double RIGHT_FRONT_OFFSET = -0.142822265625; //0.906982;  
-    public static  double LEFT_BACK_OFFSET = 0.483642578125; //0.540283;
-    public static  double RIGHT_BACK_OFFSET = 0.27880859375; //0.737305;
+    //PRACTICE OFFSETS
+    // public static  double LEFT_FRONT_OFFSET = 0.500488;
+    // public static  double RIGHT_FRONT_OFFSET = 0.906982; 
+    // public static  double LEFT_BACK_OFFSET = 0.540283;
+    // public static  double RIGHT_BACK_OFFSET = 0.27880859375;
 
+    //COMP OFFSETS
+     public static  double LEFT_FRONT_OFFSET = 0.837891;
+    public static  double RIGHT_FRONT_OFFSET = 0.355957; 
+    public static  double LEFT_BACK_OFFSET =  0.487061;
+    public static  double RIGHT_BACK_OFFSET = 0.792480;
 
     public static final double WHEEL_DIAMETER = Units.inchesToMeters(3.5); //originally 4 in template
     public static final double DRIVE_MOTOR_GEAR_RATIO = 6.75;
@@ -149,7 +170,7 @@ public final class Constants {
     public static final int leftCANSparkID = 12;
     public static final int rightCANSparkID = 14;
 
-    public static final double kClimberSpeed = 0.05;
+    public static final double kClimberSpeed = 0.15;
 
   }
 
@@ -162,16 +183,16 @@ public final class Constants {
   }
 
 
-  public void checkPracticeMode(boolean isPractice){
-    if(isPractice){
-      SwerveConstants.LEFT_BACK_DRIVE_ID = 4;
-      SwerveConstants.LEFT_BACK_TURN_ID = 5;
+  // public void checkPracticeMode(boolean isPractice){
+  //   if(isPractice){
+  //     SwerveConstants.LEFT_BACK_DRIVE_ID = 4;
+  //     SwerveConstants.LEFT_BACK_TURN_ID = 5;
 
-      SwerveConstants.LEFT_FRONT_OFFSET =  0.500488;
-      SwerveConstants.RIGHT_FRONT_OFFSET = 0.906982; 
-      SwerveConstants.LEFT_BACK_OFFSET = 0.540283;
-      SwerveConstants.RIGHT_BACK_OFFSET = 0.737305;
-    }
+  //     SwerveConstants.LEFT_FRONT_OFFSET =  0.500488;
+  //     SwerveConstants.RIGHT_FRONT_OFFSET = 0.906982; 
+  //     SwerveConstants.LEFT_BACK_OFFSET = 0.540283;
+  //     SwerveConstants.RIGHT_BACK_OFFSET = 0.737305;
+  //   }
 
-  }
+  // }
 }

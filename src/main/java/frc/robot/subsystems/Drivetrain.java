@@ -25,10 +25,45 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.SwerveConstants;
 
 public class Drivetrain extends SubsystemBase {
-  private SwerveModule leftFront = new SwerveModule(
+  //PRACTICE MODULES
+  // private SwerveModule leftFront = new SwerveModule(
+  //   SwerveConstants.LEFT_FRONT_DRIVE_ID, 
+  //   SwerveConstants.LEFT_FRONT_TURN_ID, 
+  //   true, 
+  //   true, 
+  //   SwerveConstants.LEFT_FRONT_CANCODER_ID, 
+  //   SwerveConstants.LEFT_FRONT_OFFSET);
+
+  // private SwerveModule rightFront = new SwerveModule(
+  //   SwerveConstants.RIGHT_FRONT_DRIVE_ID, 
+  //   SwerveConstants.RIGHT_FRONT_TURN_ID, 
+  //   true, //used to be true, might have to change back - Om: 2/14/24
+  //   true, 
+  //   SwerveConstants.RIGHT_FRONT_CANCODER_ID, 
+  //   SwerveConstants.RIGHT_FRONT_OFFSET);
+
+  // private SwerveModule leftBack = new SwerveModule(
+  //   SwerveConstants.LEFT_BACK_DRIVE_ID, 
+  //   SwerveConstants.LEFT_BACK_TURN_ID, 
+  //   false, 
+  //   true, 
+  //   SwerveConstants.LEFT_BACK_CANCODER_ID, 
+  //   SwerveConstants.LEFT_BACK_OFFSET);
+
+  //   private SwerveModule rightBack = new SwerveModule(
+  //   SwerveConstants.RIGHT_BACK_DRIVE_ID, 
+  //   SwerveConstants.RIGHT_BACK_TURN_ID, 
+  //   true, 
+  //   true, 
+  //   SwerveConstants.RIGHT_BACK_CANCODER_ID, 
+  //   SwerveConstants.RIGHT_BACK_OFFSET);
+
+
+  //COMPETITIOM MODULES
+   private SwerveModule leftFront = new SwerveModule(
     SwerveConstants.LEFT_FRONT_DRIVE_ID, 
     SwerveConstants.LEFT_FRONT_TURN_ID, 
-    true, 
+    false, 
     true, 
     SwerveConstants.LEFT_FRONT_CANCODER_ID, 
     SwerveConstants.LEFT_FRONT_OFFSET);
@@ -36,7 +71,7 @@ public class Drivetrain extends SubsystemBase {
   private SwerveModule rightFront = new SwerveModule(
     SwerveConstants.RIGHT_FRONT_DRIVE_ID, 
     SwerveConstants.RIGHT_FRONT_TURN_ID, 
-    true, //used to be true, might have to change back - Om: 2/14/24
+    false, //used to be true, might have to change back - Om: 2/14/24
     true, 
     SwerveConstants.RIGHT_FRONT_CANCODER_ID, 
     SwerveConstants.RIGHT_FRONT_OFFSET);
@@ -44,7 +79,7 @@ public class Drivetrain extends SubsystemBase {
   private SwerveModule leftBack = new SwerveModule(
     SwerveConstants.LEFT_BACK_DRIVE_ID, 
     SwerveConstants.LEFT_BACK_TURN_ID, 
-    false, 
+    true, 
     true, 
     SwerveConstants.LEFT_BACK_CANCODER_ID, 
     SwerveConstants.LEFT_BACK_OFFSET);
@@ -52,7 +87,7 @@ public class Drivetrain extends SubsystemBase {
     private SwerveModule rightBack = new SwerveModule(
     SwerveConstants.RIGHT_BACK_DRIVE_ID, 
     SwerveConstants.RIGHT_BACK_TURN_ID, 
-    true, 
+    false, 
     true, 
     SwerveConstants.RIGHT_BACK_CANCODER_ID, 
     SwerveConstants.RIGHT_BACK_OFFSET);
