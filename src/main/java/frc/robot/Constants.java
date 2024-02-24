@@ -53,6 +53,13 @@ public final class Constants {
     // public static  final int LEFT_BACK_TURN_ID = 5; 
     // public static final int RIGHT_BACK_TURN_ID = 2;
 
+    // public static final int LEFT_FRONT_CANCODER_ID = 2;
+    // public static final int RIGHT_FRONT_CANCODER_ID = 4;
+    // public static final int LEFT_BACK_CANCODER_ID = 1;
+    // public static final int RIGHT_BACK_CANCODER_ID = 3;
+
+    //  public static final int PIGEON_ID = 0;
+
 
     //COMPETITION IDS
 
@@ -66,26 +73,26 @@ public final class Constants {
      public static  int LEFT_BACK_TURN_ID = 4; 
      public static final int RIGHT_BACK_TURN_ID = 2;
     
-    public static final int LEFT_FRONT_CANCODER_ID = 2;
+    public static final int LEFT_FRONT_CANCODER_ID = 3;
     public static final int RIGHT_FRONT_CANCODER_ID = 4;
-    public static final int LEFT_BACK_CANCODER_ID = 1;
-    public static final int RIGHT_BACK_CANCODER_ID = 3;
+    public static final int LEFT_BACK_CANCODER_ID = 2;
+    public static final int RIGHT_BACK_CANCODER_ID = 1;
 
     public static final int PIGEON_ID = 0;
 
     //Drivetrain characteristics
 
     //PRACTICE OFFSETS
-    // public static  double LEFT_FRONT_OFFSET = 0.500488;
-    // public static  double RIGHT_FRONT_OFFSET = 0.906982; 
-    // public static  double LEFT_BACK_OFFSET = 0.540283;
-    // public static  double RIGHT_BACK_OFFSET = 0.27880859375;
+    // public static  double LEFT_FRONT_OFFSET = 0.005127;
+    // public static  double RIGHT_FRONT_OFFSET = 0.910156; 
+    // public static  double LEFT_BACK_OFFSET = 0.057617;
+    // public static  double RIGHT_BACK_OFFSET = 0.721924;
 
     //COMP OFFSETS
-     public static  double LEFT_FRONT_OFFSET = 0.837891;
-    public static  double RIGHT_FRONT_OFFSET = 0.355957; 
-    public static  double LEFT_BACK_OFFSET =  0.487061;
-    public static  double RIGHT_BACK_OFFSET = 0.792480;
+    public static  double LEFT_FRONT_OFFSET = 0.719971;	
+    public static  double RIGHT_FRONT_OFFSET = 0.640137;
+    public static  double LEFT_BACK_OFFSET = 0.655029;
+    public static  double RIGHT_BACK_OFFSET = 0.013916;
 
     public static final double WHEEL_DIAMETER = Units.inchesToMeters(3.5); //originally 4 in template
     public static final double DRIVE_MOTOR_GEAR_RATIO = 6.75;
@@ -151,7 +158,7 @@ public final class Constants {
 
 
   public static class ShooterConstants{
-    public static final int leftCANSparkID = 26; //make negative
+    public static final int leftCANSparkID = 26;
     public static final int rightCANSparkID = 25;
 
     public static final double kShooterSpeed = 0.75;
@@ -182,17 +189,4 @@ public final class Constants {
     public static final double kTransportSpeed = 0.85;
   }
 
-
-  // public void checkPracticeMode(boolean isPractice){
-  //   if(isPractice){
-  //     SwerveConstants.LEFT_BACK_DRIVE_ID = 4;
-  //     SwerveConstants.LEFT_BACK_TURN_ID = 5;
-
-  //     SwerveConstants.LEFT_FRONT_OFFSET =  0.500488;
-  //     SwerveConstants.RIGHT_FRONT_OFFSET = 0.906982; 
-  //     SwerveConstants.LEFT_BACK_OFFSET = 0.540283;
-  //     SwerveConstants.RIGHT_BACK_OFFSET = 0.737305;
-  //   }
-
-  // }
 }
