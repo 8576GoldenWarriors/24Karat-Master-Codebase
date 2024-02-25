@@ -42,7 +42,7 @@ public class Climb extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(climber.getLeftMotorVoltage()>20 || climber.getRightMotorVoltage()>20){
+    if(climber.getLeftMotorVoltage()>11.5 || climber.getRightMotorVoltage()>11.5){
       return true;
     }
     return false;

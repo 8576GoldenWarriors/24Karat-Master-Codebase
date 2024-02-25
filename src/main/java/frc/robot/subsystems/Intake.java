@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -24,6 +25,9 @@ public class Intake extends SubsystemBase {
     rollerMotor = new CANSparkMax(Constants.IntakeConstants.rollerCANSparkID, MotorType.kBrushless);
     armMotor = new CANSparkMax(Constants.IntakeConstants.pivotCANSparkID, MotorType.kBrushless);
 
+    rollerMotor.setIdleMode(IdleMode.kCoast);
+    armMotor.setIdleMode(IdleMode.kCoast);
+    
 
   }
   
@@ -73,6 +77,9 @@ public class Intake extends SubsystemBase {
 
   @Override
   public void periodic() {
+     SmartDashboard.putNumber("Arm Encoder: ", getArmEncoder().getPosition());
+     SmartDashboard.putNumber("Num ticks arm encoder: ", getArmEncoder().getCountsPerRevolution());
+     SmartDashboard.putNumber("Conversion factor", getArmEncoder().getPositionConversionFactor());
     // This method will be called once per scheduler run
   }
 

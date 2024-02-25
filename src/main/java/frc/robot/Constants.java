@@ -65,12 +65,12 @@ public final class Constants {
 
      public static final int LEFT_FRONT_DRIVE_ID = 7;
      public static final int RIGHT_FRONT_DRIVE_ID = 1;
-     public static  int LEFT_BACK_DRIVE_ID = 5;
+     public static final int LEFT_BACK_DRIVE_ID = 5;
      public static final int RIGHT_BACK_DRIVE_ID = 3;
     
      public static final int LEFT_FRONT_TURN_ID = 6;
      public static final int RIGHT_FRONT_TURN_ID = 8;
-     public static  int LEFT_BACK_TURN_ID = 4; 
+     public static  final int LEFT_BACK_TURN_ID = 4; 
      public static final int RIGHT_BACK_TURN_ID = 2;
     
     public static final int LEFT_FRONT_CANCODER_ID = 3;
@@ -83,10 +83,10 @@ public final class Constants {
     //Drivetrain characteristics
 
     //PRACTICE OFFSETS
-    // public static  double LEFT_FRONT_OFFSET = 0.005127;
-    // public static  double RIGHT_FRONT_OFFSET = 0.910156; 
-    // public static  double LEFT_BACK_OFFSET = 0.057617;
-    // public static  double RIGHT_BACK_OFFSET = 0.721924;
+    // public static  double LEFT_FRONT_OFFSET = 0.004150;
+    // public static  double RIGHT_FRONT_OFFSET = 0.907227;
+    // public static  double LEFT_BACK_OFFSET = 0.571533;
+    // public static  double RIGHT_BACK_OFFSET = 0.731201;
 
     //COMP OFFSETS
     public static  double LEFT_FRONT_OFFSET = 0.719971;	
@@ -145,14 +145,22 @@ public final class Constants {
     public static final int rollerCANSparkID = 15;
     public static final int pivotCANSparkID = 13;
 
-    public static final double kRollerInSpeed = -0.50;
-    public static final double kRollerOutSpeed = 0.65;
-    
-    public static final double kArmUpSpeed = 0.5;
-    public static final double kArmDownSpeed = -0.45;
+    //COMPETITION ROLLERS AND ARM PIVOT
+    public static final double kRollerInSpeed = 0.50;
+    public static final double kRollerOutSpeed = -0.65;
 
-    public static final double kDownPosition = 10;
-    public static final double kUpPosition = 1;
+    public static final double kArmUpSpeed = -0.4; 
+    public static final double kArmDownSpeed = 0.4; 
+
+    //PRACTICE ROLLER
+    // public static final double kRollerInSpeed = -0.50;
+    // public static final double kRollerOutSpeed = 0.65;
+    
+    // public static final double kArmUpSpeed = 0.5;
+    // public static final double kArmDownSpeed = -0.45;
+
+    public static final double kDownPosition = 10; //encoder resoltuion value
+    public static final double kUpPosition = 1; //encoder resolution value
 
   }
 
@@ -161,15 +169,20 @@ public final class Constants {
     public static final int leftCANSparkID = 26;
     public static final int rightCANSparkID = 25;
 
-    public static final double kShooterSpeed = 0.75;
+    public static final double kShooterSpeed = 1.00;
     public static final double kShintakeSpeed = -0.1;
 
 
 
     public static final int pivotCANSparkID = 11;
 
-    public static final double kPivotUpSpeed = 0.2;
-    public static final double kPivotDownSpeed = -0.1;
+    //PRACTICE SHOOTER PIVOT
+    // public static final double kPivotUpSpeed = 0.2;
+    // public static final double kPivotDownSpeed = -0.1;
+
+    //COMP SHOOTER PVIOT
+    public static final double kPivotUpSpeed = -0.25;
+     public static final double kPivotDownSpeed = 0.25;
   }
 
 

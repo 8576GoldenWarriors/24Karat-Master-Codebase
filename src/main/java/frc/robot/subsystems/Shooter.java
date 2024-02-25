@@ -25,6 +25,9 @@ public class Shooter extends SubsystemBase {
     rightMotor = new CANSparkMax(Constants.ShooterConstants.rightCANSparkID, MotorType.kBrushless);
 
     pivotMotor = new CANSparkMax(Constants.ShooterConstants.pivotCANSparkID, MotorType.kBrushless);
+
+    leftMotor.setIdleMode(IdleMode.kCoast);
+    rightMotor.setIdleMode(IdleMode.kCoast);
     pivotMotor.setIdleMode(IdleMode.kBrake);
   }
 
