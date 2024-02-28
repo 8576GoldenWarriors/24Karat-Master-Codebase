@@ -37,6 +37,11 @@ public class Shooter extends SubsystemBase {
     leftMotor.set(speed); //was negative
     rightMotor.set(speed);
   }
+  public void stopShooter() {
+    //For Autonomous
+    leftMotor.set(0);
+    rightMotor.set(0);
+  }
 
   public void setPivotSpeed(double speed){
     pivotMotor.set(speed);

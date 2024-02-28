@@ -27,12 +27,16 @@ public class Intake extends SubsystemBase {
 
     rollerMotor.setIdleMode(IdleMode.kCoast);
     armMotor.setIdleMode(IdleMode.kCoast);
-    
+
 
   }
   
   public void setRollerSpeed(double rollerSpeed) {
     rollerMotor.set(rollerSpeed);
+  }
+
+  public void stopRollerSpeed() {
+    rollerMotor.set(0);
   }
 
   public double getRollerSpeed() {

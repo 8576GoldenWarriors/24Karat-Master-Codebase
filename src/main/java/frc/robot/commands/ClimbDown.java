@@ -10,39 +10,43 @@ import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
 
 public class ClimbDown extends Command {
-  public Climber Climber;
+  public Climber climber;
   /** Creates a new ClimbDown. */
 
   public BangBangController controller = new BangBangController();
 
-  public ClimbDown(Climber Climber) {
-    this.Climber = Climber;
+  public ClimbDown(Climber climber) {
+    this.climber = climber;
 
-    addRequirements(Climber);
+    addRequirements(climber);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Climber.setSpeed(-controller.calculate(Constants.ClimberConstants.kClimberSpeed));
+    //climber.setSpeed(-controller.calculate(Constants.ClimberConstants.kClimberSpeed));
+    climber.setSpeed(-Constants.ClimberConstants.kClimberSpeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Climber.setSpeed(0);
+    climber.setSpeed(0.0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
 
+    // if(climber.getLeftMotorVoltage()>11.5 || climber.getRightMotorVoltage()>11.5){
+    //   return true;
+    // }
     return false;
-    
   }
 }

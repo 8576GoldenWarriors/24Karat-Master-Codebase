@@ -113,7 +113,7 @@ public final class Constants {
     public static final double TELE_DRIVE_MAX_ANGULAR_ACCELERATION = 12; //3
 
     public static final double AUTO_KP_TTANSLATION = 1.3;
-    public static final double AUTO_KP_ROTATIONAL = 0.4;
+    public static final double AUTO_KP_ROTATIONAL = 0.5;
 
     public static final double TRACK_WIDTH = Units.inchesToMeters(23.875);
     public static final double WHEEL_BASE = Units.inchesToMeters(23.875);
@@ -169,7 +169,7 @@ public final class Constants {
     public static final int leftCANSparkID = 26;
     public static final int rightCANSparkID = 25;
 
-    public static final double kShooterSpeed = 1.00;
+    public static final double kShooterSpeed = 0.70;
     public static final double kShintakeSpeed = -0.1;
 
 
@@ -190,7 +190,7 @@ public final class Constants {
     public static final int leftCANSparkID = 12;
     public static final int rightCANSparkID = 14;
 
-    public static final double kClimberSpeed = 0.15;
+    public static final double kClimberSpeed = -0.80;
 
   }
 

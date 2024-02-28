@@ -13,23 +13,25 @@ public class Climb extends Command {
   public Climber climber;
   /** Creates a new Climb. */
   
-  public BangBangController controller = new BangBangController();
+  //public BangBangController controller = new BangBangController();
 
   public Climb(Climber climber) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.climber = climber;
-
     addRequirements(climber);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    climber.setSpeed(controller.calculate(Constants.ClimberConstants.kClimberSpeed));
+    //climber.setSpeed(controller.calculate(Constants.ClimberConstants.kClimberSpeed));
+    climber.setSpeed(Constants.ClimberConstants.kClimberSpeed);
     
   }
 
@@ -37,14 +39,15 @@ public class Climb extends Command {
   @Override
   public void end(boolean interrupted) {
     climber.setSpeed(0);
+    
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(climber.getLeftMotorVoltage()>11.5 || climber.getRightMotorVoltage()>11.5){
-      return true;
-    }
+    // if(climber.getLeftMotorVoltage()>11.5 || climber.getRightMotorVoltage()>11.5){
+    //   return true;
+    // }
     return false;
     
   }

@@ -4,6 +4,17 @@
 
 package frc.robot;
 
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
+
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Climb;
 import frc.robot.commands.ClimbDown;
 import frc.robot.commands.IntakeDown;
@@ -19,17 +30,6 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
-
-import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.auto.NamedCommands;
-
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class RobotContainer {
 
@@ -81,9 +81,11 @@ public class RobotContainer {
     
     //Climber
     //Window button is button #7. Retracts the climber.
-    operatorController.button(7).onTrue(new ClimbDown(m_Climber));
+    //operatorController.button(7).onTrue(new ClimbDown(m_Climber));
+    operatorController.back().whileTrue(new Climb(m_Climber));
     //Three line button is button #8. Extends the climber.
-    operatorController.button(8).onTrue(new Climb(m_Climber));
+    //operatorController.button(8).onTrue(new Climb(m_Climber));
+    operatorController.start().whileTrue(new ClimbDown(m_Climber));
     
     //Arm
     //Commented bindings match the documented bindings
@@ -110,7 +112,19 @@ public class RobotContainer {
     return autoChooser.getSelected();
   }
 
+  //Autonomous Commands:
   public void registerNamedCommands(){
-    NamedCommands.registerCommand("StopModules", new InstantCommand(() -> drivetrain.stopModules()));
+    //Drivetrain Commands:
+    NamedCommands.registerCommand("StopModules", (new InstantCommand(() -> drivetrain.stopModules())).deadlineWith(new InstantCommand(() ->  new WaitCommand(1))));
+    //Shooter Commands:
+    NamedCommands.registerCommand("RunShooter", (new InstantCommand(() -> m_Shooter.setSpeed(Constants.ShooterConstants.kShooterSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(1))));
+    NamedCommands.registerCommand("StopShooter", (new InstantCommand(() -> m_Shooter.stopShooter())).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.2))));
+    NamedCommands.registerCommand("ShooterDown", (new InstantCommand(() -> m_Shooter.setPivotSpeed(Constants.ShooterConstants.kPivotDownSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.5))));;
+
+    //Intake Commands:
+    NamedCommands.registerCommand("IntakeUp", (new InstantCommand(() -> m_Intake.setArmSpeed(Constants.IntakeConstants.kArmUpSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(2))));;
+    NamedCommands.registerCommand("IntakeDown", (new InstantCommand(() -> m_Intake.setArmSpeed(Constants.IntakeConstants.kArmDownSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(2))));
+    NamedCommands.registerCommand("IntakeOut", (new InstantCommand(() -> m_Intake.setRollerSpeed(Constants.IntakeConstants.kRollerOutSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(2))));
+    NamedCommands.registerCommand("StopIntakeOut", (new InstantCommand(() -> m_Intake.stopRollerSpeed())).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.2))));
   }
 }
