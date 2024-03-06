@@ -12,6 +12,12 @@
     "data": {
       "commands": [
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 11.0
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "2 Meter - Test"

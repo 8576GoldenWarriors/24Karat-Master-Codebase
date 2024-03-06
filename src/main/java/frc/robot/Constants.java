@@ -65,17 +65,17 @@ public final class Constants {
 
      public static final int LEFT_FRONT_DRIVE_ID = 7;
      public static final int RIGHT_FRONT_DRIVE_ID = 1;
-     public static final int LEFT_BACK_DRIVE_ID = 5;
-     public static final int RIGHT_BACK_DRIVE_ID = 3;
+     public static final int LEFT_BACK_DRIVE_ID = 5; // 5
+     public static final int RIGHT_BACK_DRIVE_ID = 3; // 3
     
      public static final int LEFT_FRONT_TURN_ID = 6;
      public static final int RIGHT_FRONT_TURN_ID = 8;
-     public static  final int LEFT_BACK_TURN_ID = 4; 
-     public static final int RIGHT_BACK_TURN_ID = 2;
+     public static  final int LEFT_BACK_TURN_ID = 4; // 4 
+     public static final int RIGHT_BACK_TURN_ID = 2; // 2
     
     public static final int LEFT_FRONT_CANCODER_ID = 3;
     public static final int RIGHT_FRONT_CANCODER_ID = 4;
-    public static final int LEFT_BACK_CANCODER_ID = 2;
+    public static final int LEFT_BACK_CANCODER_ID = 0; // 2
     public static final int RIGHT_BACK_CANCODER_ID = 1;
 
     public static final int PIGEON_ID = 0;
@@ -90,8 +90,8 @@ public final class Constants {
 
     //COMP OFFSETS
     public static  double LEFT_FRONT_OFFSET = 0.719971;	
-    public static  double RIGHT_FRONT_OFFSET = 0.640137;
-    public static  double LEFT_BACK_OFFSET = 0.655029;
+    public static  double RIGHT_FRONT_OFFSET = 0.817383;//0.640137;
+    public static  double LEFT_BACK_OFFSET = 0.073975; //0.655029;
     public static  double RIGHT_BACK_OFFSET = 0.013916;
 
     public static final double WHEEL_DIAMETER = Units.inchesToMeters(3.5); //originally 4 in template
@@ -109,11 +109,11 @@ public final class Constants {
     //Teleop constraints
     public static final double TELE_DRIVE_MAX_SPEED = DRIVETRAIN_MAX_SPEED / 1;
     public static final double TELE_DRIVE_MAX_ANGULAR_SPEED = DRIVETRAIN_MAX_ANGULAR_SPEED / 1.75;
-    public static final double TELE_DRIVE_MAX_ACCELERATION = 2; //3
-    public static final double TELE_DRIVE_MAX_ANGULAR_ACCELERATION = 12; //3
+    public static final double TELE_DRIVE_MAX_ACCELERATION = 2.5; //3
+    public static final double TELE_DRIVE_MAX_ANGULAR_ACCELERATION = 12; //
 
     public static final double AUTO_KP_TTANSLATION = 1.3;
-    public static final double AUTO_KP_ROTATIONAL = 0.5;
+    public static final double AUTO_KP_ROTATIONAL = 0.1;
 
     public static final double TRACK_WIDTH = Units.inchesToMeters(23.875);
     public static final double WHEEL_BASE = Units.inchesToMeters(23.875);
@@ -146,11 +146,11 @@ public final class Constants {
     public static final int pivotCANSparkID = 13;
 
     //COMPETITION ROLLERS AND ARM PIVOT
-    public static final double kRollerInSpeed = 0.50;
-    public static final double kRollerOutSpeed = -0.65;
+    public static final double kRollerInSpeed = 0.5;
+    public static final double kRollerOutSpeed = -0.6;
 
-    public static final double kArmUpSpeed = -0.4; 
-    public static final double kArmDownSpeed = 0.4; 
+    public static final double kArmUpSpeed = -0.65; 
+    public static final double kArmDownSpeed = 0.5; 
 
     //PRACTICE ROLLER
     // public static final double kRollerInSpeed = -0.50;
@@ -169,7 +169,7 @@ public final class Constants {
     public static final int leftCANSparkID = 26;
     public static final int rightCANSparkID = 25;
 
-    public static final double kShooterSpeed = 0.70;
+    public static final double kShooterSpeed = 0.7;
     public static final double kShintakeSpeed = -0.1;
 
 
@@ -190,7 +190,7 @@ public final class Constants {
     public static final int leftCANSparkID = 12;
     public static final int rightCANSparkID = 14;
 
-    public static final double kClimberSpeed = -0.80;
+    public static final double kClimberSpeed = 0.80;
 
   }
 

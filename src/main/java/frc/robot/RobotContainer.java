@@ -81,11 +81,11 @@ public class RobotContainer {
     
     //Climber
     //Window button is button #7. Retracts the climber.
-    //operatorController.button(7).onTrue(new ClimbDown(m_Climber));
-    operatorController.back().whileTrue(new Climb(m_Climber));
-    //Three line button is button #8. Extends the climber.
-    //operatorController.button(8).onTrue(new Climb(m_Climber));
-    operatorController.start().whileTrue(new ClimbDown(m_Climber));
+    // operatorController.back().whileTrue(new Climb(m_Climber));
+    driverController.leftBumper().whileTrue(new Climb(m_Climber));
+    // //Three line button is button #8. Extends the climber.
+    driverController.rightBumper().whileTrue((new ClimbDown(m_Climber)));
+    // operatorController.start().whileTrue(new ClimbDown(m_Climber));
     
     //Arm
     //Commented bindings match the documented bindings
@@ -115,16 +115,21 @@ public class RobotContainer {
   //Autonomous Commands:
   public void registerNamedCommands(){
     //Drivetrain Commands:
+    NamedCommands.registerCommand("ResetHeading", (new InstantCommand(() -> drivetrain.zeroHeading())).deadlineWith(new InstantCommand(() ->  new WaitCommand(1))));
+
     NamedCommands.registerCommand("StopModules", (new InstantCommand(() -> drivetrain.stopModules())).deadlineWith(new InstantCommand(() ->  new WaitCommand(1))));
     //Shooter Commands:
-    NamedCommands.registerCommand("RunShooter", (new InstantCommand(() -> m_Shooter.setSpeed(Constants.ShooterConstants.kShooterSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(1))));
+    NamedCommands.registerCommand("RunShooter", (new InstantCommand(() -> m_Shooter.setSpeed(Constants.ShooterConstants.kShooterSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(3))));
     NamedCommands.registerCommand("StopShooter", (new InstantCommand(() -> m_Shooter.stopShooter())).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.2))));
-    NamedCommands.registerCommand("ShooterDown", (new InstantCommand(() -> m_Shooter.setPivotSpeed(Constants.ShooterConstants.kPivotDownSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.5))));;
+    NamedCommands.registerCommand("ShooterDown", (new InstantCommand(() -> m_Shooter.setPivotSpeed(Constants.ShooterConstants.kPivotDownSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.5))));
+    NamedCommands.registerCommand("ShooterUp", (new InstantCommand(() -> m_Shooter.setPivotSpeed(Constants.ShooterConstants.kPivotUpSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.5))));
+    NamedCommands.registerCommand("StopShooterPivot", (new InstantCommand(() -> m_Shooter.setPivotSpeed(0))).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.5))));
 
     //Intake Commands:
     NamedCommands.registerCommand("IntakeUp", (new InstantCommand(() -> m_Intake.setArmSpeed(Constants.IntakeConstants.kArmUpSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(2))));;
-    NamedCommands.registerCommand("IntakeDown", (new InstantCommand(() -> m_Intake.setArmSpeed(Constants.IntakeConstants.kArmDownSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(2))));
-    NamedCommands.registerCommand("IntakeOut", (new InstantCommand(() -> m_Intake.setRollerSpeed(Constants.IntakeConstants.kRollerOutSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(2))));
-    NamedCommands.registerCommand("StopIntakeOut", (new InstantCommand(() -> m_Intake.stopRollerSpeed())).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.2))));
+    NamedCommands.registerCommand("IntakeDown", (new InstantCommand(() -> m_Intake.setArmSpeed(Constants.IntakeConstants.kArmDownSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(3))));
+    NamedCommands.registerCommand("IntakeOut", (new InstantCommand(() -> m_Intake.setRollerSpeed(Constants.IntakeConstants.kRollerOutSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(3))));
+    NamedCommands.registerCommand("IntakeIn", (new InstantCommand(() -> m_Intake.setRollerSpeed(Constants.IntakeConstants.kRollerInSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.5))));
+    NamedCommands.registerCommand("StopIntake", (new InstantCommand(() -> m_Intake.stopRollerSpeed())).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.2))));
   }
 }

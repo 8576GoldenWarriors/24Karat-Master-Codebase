@@ -107,7 +107,9 @@ public class SwerveModule extends SubsystemBase {
   }
 
   public void setDesiredState(SwerveModuleState desiredState){
-    desiredState = SwerveModuleState.optimize(desiredState, getState().angle); 
+    SmartDashboard.putNumber("Pre-optimized", desiredState.speedMetersPerSecond);
+    desiredState = SwerveModuleState.optimize(desiredState, getState().angle);
+    SmartDashboard.putNumber("Post-optimized", desiredState.speedMetersPerSecond); 
     setAngle(desiredState);
     setSpeed(desiredState);
     SmartDashboard.putString("Swerve [" + driveMotor.getDeviceId() + "] State", getState().toString());
