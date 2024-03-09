@@ -41,6 +41,9 @@ public class IntakeIn extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    // if(intake.getDigitalInput().get()==true){
+    //   return true;
+    // }
     return false;
   }
 }

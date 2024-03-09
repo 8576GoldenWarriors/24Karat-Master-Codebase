@@ -140,7 +140,7 @@ public final class Constants {
 
 
   public static class IntakeConstants{
-    public static final int IntakeSensorID = 0;
+    public static final int IntakeSensorID = 4;
 
     public static final int rollerCANSparkID = 15;
     public static final int pivotCANSparkID = 13;
@@ -159,8 +159,8 @@ public final class Constants {
     // public static final double kArmUpSpeed = 0.5;
     // public static final double kArmDownSpeed = -0.45;
 
-    public static final double kDownPosition = 10; //encoder resoltuion value
-    public static final double kUpPosition = 1; //encoder resolution value
+    public static final double kDownPosition = 1000; //encoder resoltuion value
+    public static final double kUpPosition = 0.660; //encoder resolution value
 
   }
 
@@ -169,7 +169,7 @@ public final class Constants {
     public static final int leftCANSparkID = 26;
     public static final int rightCANSparkID = 25;
 
-    public static final double kShooterSpeed = 0.7;
+    public static final double kShooterSpeed = 0.85;
     public static final double kShintakeSpeed = -0.1;
 
 
@@ -195,11 +195,10 @@ public final class Constants {
   }
 
 
-  public static class TransportConstants {
-    public static final int leftCANSparkID = 16;
-    public static final int rightCANSparkID = 17;
+  public static class LEDConstants{
+    public static final int LED_PORT = -1;
 
-    public static final double kTransportSpeed = 0.85;
+
   }
 
 }

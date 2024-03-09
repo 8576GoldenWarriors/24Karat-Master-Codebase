@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
@@ -11,6 +12,10 @@ import frc.robot.subsystems.Intake;
 public class IntakeUp extends Command {
   /** Creates a new IntakeUp. */
   public Intake intake;
+
+  
+
+  private TrapezoidProfile.Constraints constrains = new TrapezoidProfile.Constraints(0, 0);
 
   double setpoint;
   double kP;
@@ -41,7 +46,7 @@ public class IntakeUp extends Command {
     lastError = 0;
     integral = 0;
     derivative = 0;
-    avgPos = intake.getArmEncoder().getPosition();
+    avgPos = intake.getArmEncoder().getDistance();
     motorPower = 0;
 
     error = setpoint - avgPos;
@@ -54,7 +59,7 @@ public class IntakeUp extends Command {
     intake.setArmSpeed(Constants.IntakeConstants.kArmUpSpeed);
     //assume up is positive motor speed
     // if (Math.abs(error) > (Math.abs(setpoint) / 1.5)) {
-    //   error = Math.abs(setpoint) - Math.abs(intake.getArmEncoder().getPosition());
+    //   error = Math.abs(setpoint) - Math.abs(intake.getArmEncoder().getDistance());
     //   integral = integral + error;
     //   derivative =  error - lastError;
     //   motorPower = (kP * error) + (Ki * integral) + (Kd * derivative);
@@ -63,7 +68,7 @@ public class IntakeUp extends Command {
     //     motorPower = 0.4;
     //   }
 
-    //   if (motorPower < 0.1) {
+    //   if (motorPower < 0.2) {
     //     motorPower = 0;
     //   }
 
@@ -97,9 +102,7 @@ public class IntakeUp extends Command {
     if (intake.getArmVoltage()>15){
       return true;
     }
-    // if(intake.getDigitalInput().get()==true){
-    //   return true;
-    // }
+    
     
     return false;
   }

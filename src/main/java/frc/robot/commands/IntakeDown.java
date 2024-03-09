@@ -40,7 +40,7 @@ public class IntakeDown extends Command {
     lastError = 0;
     integral = 0;
     derivative = 0;
-    avgPos = intake.getArmEncoder().getPosition();
+    avgPos = intake.getArmEncoder().getDistance();
     motorPower = 0;
 
     error = setpoint - avgPos;
@@ -52,7 +52,7 @@ public class IntakeDown extends Command {
   public void execute() {
     intake.setArmSpeed(Constants.IntakeConstants.kArmDownSpeed);
     // if (Math.abs(error) > (Math.abs(setpoint) / 1.5)) {
-    //   error = Math.abs(setpoint) - Math.abs(intake.getArmEncoder().getPosition());
+    //   error = Math.abs(setpoint) - Math.abs(intake.getArmEncoder().getDistance());
     //   integral = integral + error;
     //   derivative = error - lastError;
     //   motorPower = (kP * error) + (Ki * integral) + (Kd * derivative);
@@ -61,7 +61,7 @@ public class IntakeDown extends Command {
     //     motorPower = 0.4;
     //   }
 
-    //   if (motorPower < 0.1) {
+    //   if (motorPower < 0.2) {
     //     motorPower = 0;
     //   }
 
@@ -91,9 +91,7 @@ public class IntakeDown extends Command {
     if (done) {
       return true;
     }
-    if(intake.getArmVoltage()>15){
-      return true;
-    }
+    
 
     return false;
 

@@ -10,6 +10,8 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -17,13 +19,27 @@ import frc.robot.Constants;
 public class Intake extends SubsystemBase {
   private CANSparkMax rollerMotor;
   private CANSparkMax armMotor;
-  public DigitalInput photoelectric;
+  private DigitalInput intakeSensor;
+  //private Encoder armEncoder;
+  private DutyCycleEncoder armEncoder;
+
+
 
   /** Creates a new Intake. */
   public Intake() {
-    photoelectric = new DigitalInput(Constants.IntakeConstants.IntakeSensorID);
+    
+
+
     rollerMotor = new CANSparkMax(Constants.IntakeConstants.rollerCANSparkID, MotorType.kBrushless);
     armMotor = new CANSparkMax(Constants.IntakeConstants.pivotCANSparkID, MotorType.kBrushless);
+
+    intakeSensor = new DigitalInput(Constants.IntakeConstants.IntakeSensorID);
+    
+
+
+    //armEncoder = new Encoder(0, 2, 3);
+    armEncoder = new DutyCycleEncoder(1);
+    
 
     rollerMotor.setIdleMode(IdleMode.kCoast);
     armMotor.setIdleMode(IdleMode.kCoast);
@@ -44,7 +60,7 @@ public class Intake extends SubsystemBase {
   }
 
   public void setArmSpeed(double armSpeed){
-    armMotor.setSmartCurrentLimit(5);
+    armMotor.setSmartCurrentLimit(15); //check
 
     
     armMotor.set(armSpeed);
@@ -62,12 +78,13 @@ public class Intake extends SubsystemBase {
     return rollerMotor.getEncoder();
   }
 
-  public RelativeEncoder getArmEncoder() {
-    return armMotor.getEncoder();
+  public DutyCycleEncoder getArmEncoder() {
+    //return armEncoder;
+    return armEncoder;
   }
 
   public DigitalInput getDigitalInput() {
-    return photoelectric;
+    return intakeSensor;
   }
 
 
@@ -81,10 +98,13 @@ public class Intake extends SubsystemBase {
 
   @Override
   public void periodic() {
-     SmartDashboard.putNumber("Arm Encoder: ", getArmEncoder().getPosition());
-     SmartDashboard.putNumber("Num ticks arm encoder: ", getArmEncoder().getCountsPerRevolution());
-     SmartDashboard.putNumber("Conversion factor", getArmEncoder().getPositionConversionFactor());
-    // This method will be called once per scheduler run
+    
+    SmartDashboard.putBoolean("Arm Encoder Online: ", getArmEncoder().isConnected());
+     SmartDashboard.putNumber("Arm Encoder Distance: ", getArmEncoder().getDistance());
+     SmartDashboard.putNumber("Arm Encoder: ", getArmEncoder().getAbsolutePosition());
+    SmartDashboard.putBoolean("Arm Sensor Value", intakeSensor.get());
+
+  
   }
 
 }
