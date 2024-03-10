@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
@@ -39,10 +40,13 @@ public class Intake extends SubsystemBase {
 
     //armEncoder = new Encoder(0, 2, 3);
     armEncoder = new DutyCycleEncoder(1);
+    armEncoder.setPositionOffset(0.65);
     
 
     rollerMotor.setIdleMode(IdleMode.kCoast);
     armMotor.setIdleMode(IdleMode.kCoast);
+
+    armMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 20);
 
 
   }
@@ -60,7 +64,7 @@ public class Intake extends SubsystemBase {
   }
 
   public void setArmSpeed(double armSpeed){
-    armMotor.setSmartCurrentLimit(15); //check
+    armMotor.setSmartCurrentLimit(50); //check
 
     
     armMotor.set(armSpeed);

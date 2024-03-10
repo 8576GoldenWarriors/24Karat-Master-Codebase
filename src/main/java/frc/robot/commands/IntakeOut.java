@@ -42,9 +42,7 @@ public class IntakeOut extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(intake.getArmVoltage()>15){
-      return true;
-    }
+    
     return false;
   }
 }

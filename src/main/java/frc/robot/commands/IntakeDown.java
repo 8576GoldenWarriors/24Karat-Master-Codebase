@@ -4,79 +4,74 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
 
 public class IntakeDown extends Command {
-  public Intake intake;
+  private Intake intake;
+  private DutyCycleEncoder encoder;
 
-  double setpoint;
-  double kP;
-  double Ki;
-  double Kd;
+  private TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(Constants.IntakeConstants.kMaxArmVelocity*1.2,Constants.IntakeConstants.kMaxArmAcceleration*0.90);
+  private ProfiledPIDController controller = new ProfiledPIDController(.7, 0.0, 0.2, constraints);
+
+  // double setpoint;
+  // double kP;
+  // double Ki;
+  // double Kd;
   double error;
   double lastError;
-  double integral;
-  double derivative;
-  double avgPos;
-  double motorPower;
+  // double integral;
+  // double derivative;
+  // double avgPos;
+  // double motorPower;
 
-  Boolean done = false;
+  boolean done = false;
 
   public IntakeDown(Intake intake) {
     this.intake = intake;
+    this.encoder = intake.getArmEncoder();
 
+    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    setpoint = Constants.IntakeConstants.kDownPosition;
-    kP = 0.07;
-    Ki = 0;
-    Kd = 0.01;
-    lastError = 0;
-    integral = 0;
-    derivative = 0;
-    avgPos = intake.getArmEncoder().getDistance();
-    motorPower = 0;
+    // setpoint = Constants.IntakeConstants.kUpPosition;
+    // kP = 0.07;
+    // Ki = 0;
+    // Kd = 0.01;
+    // lastError = 0;
+    // integral = 0;
+    // derivative = 0;
+    // avgPos = intake.getArmEncoder().getDistance();
+    // motorPower = 0;
 
-    error = setpoint - avgPos;
-    integral = 0;
+    //error = Constants.IntakeConstants.kArmUpPosition - encoder.getDistance();
+    // integral = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intake.setArmSpeed(Constants.IntakeConstants.kArmDownSpeed);
-    // if (Math.abs(error) > (Math.abs(setpoint) / 1.5)) {
-    //   error = Math.abs(setpoint) - Math.abs(intake.getArmEncoder().getDistance());
-    //   integral = integral + error;
-    //   derivative = error - lastError;
-    //   motorPower = (kP * error) + (Ki * integral) + (Kd * derivative);
+    //intake.setArmSpeed(Constants.IntakeConstants.kArmDownSpeed);
+      controller.setGoal(Constants.IntakeConstants.kArmDownPosition);
+      // if (encoder.getDistance() > 0.009 && encoder.getDistance() < 0.18){
+      //   speed = speed * 15;
+      // }
+      intake.setArmSpeed(controller.calculate(encoder.getDistance()));
 
-    //   if (motorPower > 0.4) {
-    //     motorPower = 0.4;
-    //   }
-
-    //   if (motorPower < 0.2) {
-    //     motorPower = 0;
-    //   }
-
-    //   if (motorPower == 0) {
-    //     done = true;
-    //   }
-
-    //   System.out.println(error);
-
-    //   intake.setArmSpeed(motorPower);
-    // }
-
-    // else {
+    //assume up is positive motor speed
+    
+    // if(!(Math.abs(error) > (Math.abs(Constants.IntakeConstants.kArmUpPosition) / 1.5))){
     //   done = true;
     // }
+    error = Constants.IntakeConstants.kArmUpPosition - encoder.getDistance();
   }
 
   // Called once the command ends or is interrupted.
@@ -88,12 +83,11 @@ public class IntakeDown extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (done) {
+    if(done){
       return true;
     }
     
-
+    
     return false;
-
   }
 }

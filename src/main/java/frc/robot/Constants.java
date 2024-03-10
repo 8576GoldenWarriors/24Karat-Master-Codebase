@@ -159,8 +159,19 @@ public final class Constants {
     // public static final double kArmUpSpeed = 0.5;
     // public static final double kArmDownSpeed = -0.45;
 
-    public static final double kDownPosition = 1000; //encoder resoltuion value
-    public static final double kUpPosition = 0.660; //encoder resolution value
+    public static final double kArmDownPosition = 0.6002;//0.602; //encoder resoltuion value
+    public static final double kArmUpPosition = 0.0; //encoder resolution value
+
+
+    //IN ROTATIONS
+    public static final double kMaxArmAcceleration = 1.05;
+    public static final double kMaxArmVelocity = 1.5;
+
+    public static final double kP_armUp = 1.5;
+    public static final double kP_armDown = 1.5;
+
+    public static final double kI_arm = 0.0;
+    public static final double kD_arm = 0.2;
 
   }
 
