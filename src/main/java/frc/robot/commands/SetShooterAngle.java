@@ -4,42 +4,42 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.RobotContainer;
+import frc.robot.Constants;
 import frc.robot.subsystems.Shooter;
 
-public class HoldShooter extends Command {
-  /** Creates a new HoldShooter. */
+public class SetShooterAngle extends Command {
+  PIDController controller;
   Shooter shooter;
-  public HoldShooter(Shooter shooter) {
-
+  double desiredAngle;
+  /** Creates a new ShooterMid. */
+  public SetShooterAngle(Shooter shooter, double desiredAngle) {
     this.shooter = shooter;
+    this.desiredAngle = desiredAngle;
 
-    addRequirements(shooter);
-    // Use addRequirements() here to declare subsystem dependencies.
+    controller = new PIDController(0.5, 0, 0.1);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
-  
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    shooter.setPivotSpeed(controller.calculate(shooter.getAbsoluteDistance(), desiredAngle));
+  }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
+    shooter.setPivotSpeed(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if((RobotContainer.operatorController.getHID().getYButtonPressed() && RobotContainer.operatorController.getHID().getLeftBumperPressed())
-    || (RobotContainer.operatorController.getHID().getBButtonPressed() && RobotContainer.operatorController.getHID().getLeftBumperPressed())
-    ){
+    if(Math.abs(shooter.getShooterEncoder().getDistance()-desiredAngle)<0.00555556){
       return true;
     }
     return false;

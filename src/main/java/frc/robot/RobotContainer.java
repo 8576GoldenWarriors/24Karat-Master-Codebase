@@ -21,6 +21,7 @@ import frc.robot.commands.IntakeDown;
 import frc.robot.commands.IntakeIn;
 import frc.robot.commands.IntakeOut;
 import frc.robot.commands.IntakeUp;
+import frc.robot.commands.SetShooterAngle;
 import frc.robot.commands.Shintake;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.ShooterDown;
@@ -29,6 +30,7 @@ import frc.robot.commands.SwerveDrive;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.LED;
 import frc.robot.subsystems.Shooter;
 
 public class RobotContainer {
@@ -39,6 +41,7 @@ public class RobotContainer {
   public static final Intake m_Intake = new Intake();
   public static final Shooter m_Shooter = new Shooter();
   public static final Climber m_Climber = new Climber();
+  //public static final LED m_led = new LED(Constants.LEDConstants.LED_PORT, Constants.LEDConstants.LedLength1);
 
 
   public static final CommandXboxController driverController = new CommandXboxController(Constants.ControllerConstants.kDriverControllerPort);
@@ -89,14 +92,16 @@ public class RobotContainer {
     
     //Arm
     //Commented bindings match the documented bindings
-    operatorController.a().and(operatorController.leftBumper()).whileTrue( new IntakeUp(m_Intake) );
-    operatorController.x().and(operatorController.leftBumper()).whileTrue( new IntakeDown(m_Intake) );
+    operatorController.leftBumper().and(operatorController.a()).toggleOnTrue( new IntakeUp(m_Intake));
+    operatorController.leftBumper().and(operatorController.x()).toggleOnTrue( new IntakeDown(m_Intake));
     //operatorController.a().and(operatorController.leftBumper()).onTrue(new IntakeUp(m_Intake));
     //operatorController.x().and(operatorController.leftBumper()).onTrue(new IntakeDown(m_Intake));
 
     //test code for shooter pivot
     operatorController.b().and(operatorController.leftBumper()).whileTrue( new ShooterDown(m_Shooter));
     operatorController.y().and(operatorController.leftBumper()).whileTrue( new ShooterUp(m_Shooter));
+
+    operatorController.povDown().whileTrue(new SetShooterAngle(m_Shooter, 0.1));
 
 
     

@@ -12,7 +12,6 @@ import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -38,8 +37,7 @@ public class Intake extends SubsystemBase {
     
 
 
-    //armEncoder = new Encoder(0, 2, 3);
-    armEncoder = new DutyCycleEncoder(1);
+    armEncoder = new DutyCycleEncoder(Constants.IntakeConstants.intakeEncoderPort);
     armEncoder.setPositionOffset(0.65);
     
 
@@ -64,7 +62,7 @@ public class Intake extends SubsystemBase {
   }
 
   public void setArmSpeed(double armSpeed){
-    armMotor.setSmartCurrentLimit(50); //check
+    armMotor.setSmartCurrentLimit(55); //check
 
     
     armMotor.set(armSpeed);

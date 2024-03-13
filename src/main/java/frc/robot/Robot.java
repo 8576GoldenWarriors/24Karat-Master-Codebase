@@ -47,6 +47,11 @@ public class Robot extends TimedRobot {
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
+    // if(RobotContainer.m_Intake.getDigitalInput().get()){
+    //   RobotContainer.m_led.setLED("green");
+    // }
+    // RobotContainer.m_led.setLED("red");
+
     CommandScheduler.getInstance().run();
   }
 
@@ -90,6 +95,8 @@ public class Robot extends TimedRobot {
 
     drivetrain.resetAllEncoders();
     drivetrain.setAllIdleMode(true);
+
+    //RobotContainer.m_Shooter.zeroEncoder();
   }
 
   /** This function is called periodically during operator control. */

@@ -30,12 +30,14 @@ public class ShooterUp extends Command {
   @Override
   public void end(boolean interrupted) {
     shooter.setPivotSpeed(0);
+    //shooter.setShooterAngle(shooter.getShooterEncoder().get());
+
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(shooter.getPivotMotorVoltage()>15){
+    if(shooter.getPivotMotorVoltage()>35){
       return true;
     }
     return false;

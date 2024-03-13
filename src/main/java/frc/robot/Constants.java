@@ -103,13 +103,13 @@ public final class Constants {
     public static final double TURN_MOTOR_VCONVERSION = TURN_MOTOR_PCONVERSION / 60.0;
     public static final double KP_TURNING = 0.575;
 
-    public static final double DRIVETRAIN_MAX_SPEED = 1.75; //4.0
-    public static final double DRIVETRAIN_MAX_ANGULAR_SPEED = 1.25 * Math.PI; //3.5
+    public static final double DRIVETRAIN_MAX_SPEED = 3.75; //4.0
+    public static final double DRIVETRAIN_MAX_ANGULAR_SPEED = 3.25 * Math.PI; //3.5
 
     //Teleop constraints
     public static final double TELE_DRIVE_MAX_SPEED = DRIVETRAIN_MAX_SPEED / 1;
     public static final double TELE_DRIVE_MAX_ANGULAR_SPEED = DRIVETRAIN_MAX_ANGULAR_SPEED / 1.75;
-    public static final double TELE_DRIVE_MAX_ACCELERATION = 2.5; //3
+    public static final double TELE_DRIVE_MAX_ACCELERATION = 3.5; //3
     public static final double TELE_DRIVE_MAX_ANGULAR_ACCELERATION = 12; //
 
     public static final double AUTO_KP_TTANSLATION = 1.3;
@@ -145,8 +145,10 @@ public final class Constants {
     public static final int rollerCANSparkID = 15;
     public static final int pivotCANSparkID = 13;
 
+    public static final int intakeEncoderPort = 1;
+
     //COMPETITION ROLLERS AND ARM PIVOT
-    public static final double kRollerInSpeed = 0.5;
+    public static final double kRollerInSpeed = 0.6;
     public static final double kRollerOutSpeed = -0.6;
 
     public static final double kArmUpSpeed = -0.65; 
@@ -164,8 +166,8 @@ public final class Constants {
 
 
     //IN ROTATIONS
-    public static final double kMaxArmAcceleration = 1.05;
-    public static final double kMaxArmVelocity = 1.5;
+    public static final double kMaxArmAcceleration = 0.4;//1.05;
+    public static final double kMaxArmVelocity = 0.55;//1.5;
 
     public static final double kP_armUp = 1.5;
     public static final double kP_armDown = 1.5;
@@ -180,12 +182,16 @@ public final class Constants {
     public static final int leftCANSparkID = 26;
     public static final int rightCANSparkID = 25;
 
-    public static final double kShooterSpeed = 0.85;
+    public static final double kShooterSpeed = 0.70;
     public static final double kShintakeSpeed = -0.1;
 
 
 
     public static final int pivotCANSparkID = 11;
+
+    public static final int shooterEncoderID = 0;
+
+    public static final double shooterEncoderOffset = 0.534;
 
     //PRACTICE SHOOTER PIVOT
     // public static final double kPivotUpSpeed = 0.2;
@@ -208,7 +214,7 @@ public final class Constants {
 
   public static class LEDConstants{
     public static final int LED_PORT = -1;
-
+    public static final int LedLength1 = 10;
 
   }
 
