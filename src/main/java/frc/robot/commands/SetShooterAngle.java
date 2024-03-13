@@ -5,8 +5,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants;
 import frc.robot.subsystems.Shooter;
 
 public class SetShooterAngle extends Command {
@@ -18,7 +18,8 @@ public class SetShooterAngle extends Command {
     this.shooter = shooter;
     this.desiredAngle = desiredAngle;
 
-    controller = new PIDController(0.5, 0, 0.1);
+    controller = new PIDController(5.0, 0, 0.1);
+    addRequirements(shooter);
   }
 
   @Override
@@ -27,7 +28,9 @@ public class SetShooterAngle extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.setPivotSpeed(controller.calculate(shooter.getAbsoluteDistance(), desiredAngle));
+    double motorPower = controller.calculate(shooter.getAbsoluteDistance(), desiredAngle);
+    shooter.setPivotSpeed(-motorPower);
+    SmartDashboard.putNumber("Shooter PID Power", motorPower);
   }
 
   // Called once the command ends or is interrupted.
@@ -39,7 +42,7 @@ public class SetShooterAngle extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(Math.abs(shooter.getShooterEncoder().getDistance()-desiredAngle)<0.00555556){
+    if(Math.abs(shooter.getShooterEncoder().getDistance()-desiredAngle)<0.01 || Math.abs(shooter.getShooterEncoder().getDistance())>0.13){
       return true;
     }
     return false;

@@ -80,7 +80,7 @@ public class RobotContainer {
     //Shooter
     operatorController.y().onTrue(new Shoot(m_Shooter)); //b button ends shoot command, defined in shoot command
     //Shintake
-    operatorController.povDown().whileTrue(new Shintake(m_Shooter));
+    // operatorController.povDown().whileTrue(new Shintake(m_Shooter));
     
     //Climber
     //Window button is button #7. Retracts the climber.
@@ -101,7 +101,8 @@ public class RobotContainer {
     operatorController.b().and(operatorController.leftBumper()).whileTrue( new ShooterDown(m_Shooter));
     operatorController.y().and(operatorController.leftBumper()).whileTrue( new ShooterUp(m_Shooter));
 
-    operatorController.povDown().whileTrue(new SetShooterAngle(m_Shooter, 0.1));
+    operatorController.povLeft().onTrue(new SetShooterAngle(m_Shooter, 0.05));
+    operatorController.povUp().onTrue(new SetShooterAngle(m_Shooter, 0.1));
 
 
     

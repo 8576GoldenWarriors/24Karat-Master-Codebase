@@ -22,7 +22,7 @@ public class Shooter extends SubsystemBase {
 
 
   private DutyCycleEncoder shooterEncoder;
-  private double shooterAngle;
+ 
   //private CANSparkMax pivotMotor; not implemented yet
 
   /** Creates a new Shooter. */
@@ -34,6 +34,7 @@ public class Shooter extends SubsystemBase {
 
     shooterEncoder = new DutyCycleEncoder(Constants.ShooterConstants.shooterEncoderID);
     shooterEncoder.setPositionOffset(Constants.ShooterConstants.shooterEncoderOffset);
+    
 
     leftMotor.setIdleMode(IdleMode.kCoast);
     rightMotor.setIdleMode(IdleMode.kCoast);
@@ -58,9 +59,7 @@ public class Shooter extends SubsystemBase {
     pivotMotor.set(speed);
   }
 
-  public void setShooterAngle(double rotations){
-    this.shooterAngle = rotations;
-  }
+  
   public void zeroEncoder(){
     shooterEncoder.reset();
   }
