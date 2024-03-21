@@ -5,33 +5,33 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Intake;
 
-public class Shintake extends Command {
-  /** Creates a new Shintake. */
+public class OverrideIntakeDown extends Command {
+  Intake intake;
+  /** Creates a new OverrideIntakeDown. */
+  public OverrideIntakeDown(Intake intake) {
+    this.intake = intake;
 
-  Shooter shooter;
-  public Shintake(Shooter shooter) {
-    
-    this.shooter = shooter;
-    addRequirements(shooter);
+    addRequirements(intake);
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.setSpeed(Constants.ShooterConstants.kShintakeSpeed);
+        intake.setArmSpeed(-0.3);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooter.setSpeed(0);
+    intake.setArmSpeed(0);
   }
 
   // Returns true when the command should end.

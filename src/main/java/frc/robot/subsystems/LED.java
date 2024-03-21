@@ -13,50 +13,68 @@ public class LED extends SubsystemBase {
   AddressableLED led;
   AddressableLEDBuffer ledBuffer;
   int length;
-  String color;
+  int colorID;
 
   public LED(int port, int length) {
-    //led = new AddressableLED(port);
-    // ledBuffer = new AddressableLEDBuffer(length);
-    // this.length = length;
-    // led.setLength(length);
+//     led = new AddressableLED(port);
+//     ledBuffer = new AddressableLEDBuffer(length);
+//     this.length = length;
+//     led.setLength(length);
+    
 
-    // for(int i=0; i<length; i++){
-    //   ledBuffer.setHSV(i, 0, 100, 100);
-    // }
+//     for(int i=0; i<length; i++){
+//       ledBuffer.setHSV(i, 0, 100, 100);
+//     }
 
-    // led.setData(ledBuffer);
+//     led.setData(ledBuffer);
 
-    // led.start();
+//     led.start();
 
-    // color = "red";
+//     colorID = 0;
+
+    
   }
-  public void setLED(String color){
-    if(color.equals("green") && !(this.color.equals("green"))){
-      green();
-    }
-    if(color.equals("red") && !(this.color.equals("red"))){
-      red();
-    }
-  }
+//   public void setLED(int colorID){
+//     if(colorID == 1  && !(this.colorID==1)){
+      
+//       green();
+//     }
+//     else{
+//       gold();
+//     }
 
-  public void green(){
-    for(int i=0; i<length; i++){
-      ledBuffer.setHSV(i, 126, 69, 100);
-    }
-    color = "green";
-    led.setData(ledBuffer);
-  }
-  public void red(){
-    for(int i=0; i<length; i++){
-      ledBuffer.setHSV(i, 0, 100, 100);
-    }
-    color = "red";
-    led.setData(ledBuffer);
-  }
+//     if(colorID == 0  && !(this.colorID ==0)){
+//       gold();
+//     }
+//     else{
+//       green();
+//     }
+//   }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+//   public void green(){
+//     for(int i=0; i<length; i++){
+//       ledBuffer.setHSV(i, 126, 69, 100);
+//     }
+//     colorID = 1;
+//     led.setData(ledBuffer);
+//    // System.out.println("green");
+//   }
+
+//   public void gold(){
+//     for(int i=0; i<length; i++){
+//       ledBuffer.setHSV(i, 45, 100, 100);
+//     }
+//     colorID = 0;
+//     led.setData(ledBuffer);
+//     //System.out.println("gold");
+//   }
+
+//   @Override
+//   public void periodic() {
+//     // This method will be called once per scheduler run
+
+//     led.setData(ledBuffer);
+
+//     led.start();
+//   }
 }

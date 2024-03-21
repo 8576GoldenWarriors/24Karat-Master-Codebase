@@ -27,9 +27,9 @@ public class SwerveDrive extends Command {
   @Override
   public void execute() {
     RobotContainer.drivetrain.swerveDrive(
-      -RobotContainer.driverController.getLeftY(), 
-      -RobotContainer.driverController.getLeftX(), 
-      -RobotContainer.driverController.getRightX(),
+      -RobotContainer.driverController.getLeftY() *1, 
+      -RobotContainer.driverController.getLeftX() *1, 
+      -RobotContainer.driverController.getRightX() *1,
       true, //!RobotContainer.driverController.getHID().getRawButton(XboxController.Button.kB.value)
       new Translation2d(),
       true);

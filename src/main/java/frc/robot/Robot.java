@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.AddressableLED;
+import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -22,6 +24,9 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
+//   public static final AddressableLED m_led = new AddressableLED(Constants.LEDConstants.LED_PORT1);
+//  public static final AddressableLEDBuffer m_ledBuffer = new AddressableLEDBuffer(Constants.LEDConstants.LedLength1);
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -30,6 +35,14 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+    // m_led.setLength(Constants.LEDConstants.LedLength1);
+    // for(int i = 0; i<Constants.LEDConstants.LedLength1; i++){
+    //   m_ledBuffer.setHSV(i, 126, 100, 100);
+    // }
+    // m_led.setData(m_ledBuffer);
+
+    // m_led.start();
+
     m_robotContainer = new RobotContainer();
   }
 
@@ -42,14 +55,26 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
-    // if(RobotContainer.m_Intake.getDigitalInput().get()){
-    //   RobotContainer.m_led.setLED("green");
-    // }
-    // RobotContainer.m_led.setLED("red");
+  //   if(RobotContainer.m_IntakeRoller.getDigitalInput().get()){
+  //     for(var i=0; i<Constants.LEDConstants.LedLength1; i++){
+  //       //gold. no note
+  //       m_ledBuffer.setHSV(i, 45, 100, 100);
+  //     }
+      
+  //   }
+  //   else{
+  //     for(var i=0; i<Constants.LEDConstants.LedLength1; i++){
+  //       //green. note intaked
+  //       m_ledBuffer.setHSV(i, 126, 69, 100);
+  //     }
+  //  }
+  //   m_led.setData(m_ledBuffer);
+    
 
     CommandScheduler.getInstance().run();
   }
@@ -74,6 +99,9 @@ public class Robot extends TimedRobot {
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
+    }
+    else{
+      RobotContainer.m_Intake.zeroEncoder();
     }
     drivetrain.zeroHeading();
   }

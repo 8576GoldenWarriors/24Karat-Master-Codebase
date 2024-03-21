@@ -6,37 +6,43 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
-import frc.robot.subsystems.Intake;
+import frc.robot.RobotContainer;
+import frc.robot.subsystems.IntakeRoller;
 
 public class IntakeOut extends Command {
-  public Intake intake;
+  private IntakeRoller intakeRoller;
 
   //public BangBangController controller = new BangBangController();
   
   /** Creates a new IntakeOut. */
-  public IntakeOut(Intake intake) {
-    this.intake = intake;
+  public IntakeOut(IntakeRoller intakeRoller) {
+    this.intakeRoller = intakeRoller;
 
-    addRequirements(intake);
+    addRequirements(intakeRoller);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    intake.SetCoast();
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      intake.setRollerSpeed(Constants.IntakeConstants.kRollerOutSpeed);
+    if (!RobotContainer.operatorController.getHID().getLeftBumper()) {
+      intakeRoller.setRollerSpeed(Constants.IntakeConstants.kRollerOutSpeed);
+    }
+    else{
+      intakeRoller.setRollerSpeed(0);
+    }
     }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.setRollerSpeed(0);
+    intakeRoller.setRollerSpeed(0);
   }
 
   // Returns true when the command should end.

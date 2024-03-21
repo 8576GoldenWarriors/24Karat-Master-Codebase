@@ -79,7 +79,7 @@ public class Drivetrain extends SubsystemBase {
   private SwerveModule leftBack = new SwerveModule(
     SwerveConstants.LEFT_BACK_DRIVE_ID, 
     SwerveConstants.LEFT_BACK_TURN_ID, 
-    true, 
+    false, 
     true, 
     SwerveConstants.LEFT_BACK_CANCODER_ID, 
     SwerveConstants.LEFT_BACK_OFFSET);
@@ -87,7 +87,7 @@ public class Drivetrain extends SubsystemBase {
     private SwerveModule rightBack = new SwerveModule(
     SwerveConstants.RIGHT_BACK_DRIVE_ID, 
     SwerveConstants.RIGHT_BACK_TURN_ID, 
-    true, 
+    false, 
     true, 
     SwerveConstants.RIGHT_BACK_CANCODER_ID, 
     SwerveConstants.RIGHT_BACK_OFFSET);

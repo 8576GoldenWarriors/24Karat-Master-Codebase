@@ -12,17 +12,27 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class Climber extends SubsystemBase {
   /** Creates a new Climber. */
   private CANSparkMax leftMotor;
   private CANSparkMax rightMotor;
 
+  private RelativeEncoder leftEncoder;
+  private RelativeEncoder rightEncoder;
+
+  public boolean rainbowBoolean = false;
+
+
   
   
   public Climber() {
     leftMotor = new CANSparkMax(Constants.ClimberConstants.leftCANSparkID, MotorType.kBrushless);
     rightMotor = new CANSparkMax(Constants.ClimberConstants.rightCANSparkID, MotorType.kBrushless);
+
+    leftEncoder = leftMotor.getEncoder();
+    rightEncoder = rightMotor.getEncoder();
 
     leftMotor.setIdleMode(IdleMode.kBrake);
     rightMotor.setIdleMode(IdleMode.kBrake);
@@ -36,8 +46,20 @@ public class Climber extends SubsystemBase {
     leftMotor.set(speed);
     rightMotor.set(-speed);
 
+    rainbowBoolean = true;
+
 
   }
+
+  public boolean getRainbowBoolean(){
+    return rainbowBoolean;
+  }
+
+  public void setRainbowBoolean(boolean bool){
+    rainbowBoolean = bool;
+  }
+
+
 
   public void setCoast(){
     leftMotor.setIdleMode(IdleMode.kCoast);
@@ -49,12 +71,12 @@ public class Climber extends SubsystemBase {
     rightMotor.setIdleMode(IdleMode.kBrake);
   }
 
-  public double getLeftMotorVoltage(){
-    return leftMotor.getBusVoltage();
+  public double getLeftCurrent(){
+    return leftMotor.getOutputCurrent();
   }
 
-  public double getRightMotorVoltage(){
-    return rightMotor.getBusVoltage();
+  public double getRightCurrent(){
+    return rightMotor.getOutputCurrent();
   }
 
   public RelativeEncoder getLeftEncoder() {
@@ -67,7 +89,9 @@ public class Climber extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("AVERAGE CLIMBER VOLTAGE: ", (getLeftMotorVoltage()+getRightMotorVoltage())/2);
+    //SmartDashboard.putNumber("AVERAGE CLIMBER VOLTAGE: ", (getLeftMotorVoltage()+getRightMotorVoltage())/2);
+    SmartDashboard.putNumber("Left Climb Encoder", getLeftEncoder().getPosition());
+    SmartDashboard.putNumber("Right Climber Encoder: ", getRightEncoder().getPosition());
     //This method will be called once per scheduler run
   }
 }

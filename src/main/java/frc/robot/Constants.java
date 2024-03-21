@@ -90,9 +90,9 @@ public final class Constants {
 
     //COMP OFFSETS
     public static  double LEFT_FRONT_OFFSET = 0.719971;	
-    public static  double RIGHT_FRONT_OFFSET = 0.817383;//0.640137;
-    public static  double LEFT_BACK_OFFSET = 0.073975; //0.655029;
-    public static  double RIGHT_BACK_OFFSET = 0.013916;
+    public static  double RIGHT_FRONT_OFFSET = 0.803467;//0.817383;
+    public static  double LEFT_BACK_OFFSET = 0.418945;//0.490967;//0.519043;
+    public static  double RIGHT_BACK_OFFSET = 0.504883;//0.013916; 
 
     public static final double WHEEL_DIAMETER = Units.inchesToMeters(3.5); //originally 4 in template
     public static final double DRIVE_MOTOR_GEAR_RATIO = 6.75;
@@ -103,14 +103,14 @@ public final class Constants {
     public static final double TURN_MOTOR_VCONVERSION = TURN_MOTOR_PCONVERSION / 60.0;
     public static final double KP_TURNING = 0.575;
 
-    public static final double DRIVETRAIN_MAX_SPEED = 3.75; //4.0
-    public static final double DRIVETRAIN_MAX_ANGULAR_SPEED = 3.25 * Math.PI; //3.5
+    public static final double DRIVETRAIN_MAX_SPEED = 4.75; //4.0
+    public static final double DRIVETRAIN_MAX_ANGULAR_SPEED = 4.25 * Math.PI; //3.5
 
     //Teleop constraints
     public static final double TELE_DRIVE_MAX_SPEED = DRIVETRAIN_MAX_SPEED / 1;
     public static final double TELE_DRIVE_MAX_ANGULAR_SPEED = DRIVETRAIN_MAX_ANGULAR_SPEED / 1.75;
-    public static final double TELE_DRIVE_MAX_ACCELERATION = 3.5; //3
-    public static final double TELE_DRIVE_MAX_ANGULAR_ACCELERATION = 12; //
+    public static final double TELE_DRIVE_MAX_ACCELERATION = 5.5; //3
+    public static final double TELE_DRIVE_MAX_ANGULAR_ACCELERATION = 15; //
 
     public static final double AUTO_KP_TTANSLATION = 1.3;
     public static final double AUTO_KP_ROTATIONAL = 0.1;
@@ -185,6 +185,8 @@ public final class Constants {
     public static final double kShooterSpeed = 0.70;
     public static final double kShintakeSpeed = -0.1;
 
+    public static final double kAmpSpeed = 0.13;
+
 
 
     public static final int pivotCANSparkID = 11;
@@ -213,8 +215,12 @@ public final class Constants {
 
 
   public static class LEDConstants{
-    public static final int LED_PORT = -1;
-    public static final int LedLength1 = 10;
+    public static final int LED_PORT1 = 9;
+    public static final int LedLength1 = 30+28;
+
+    
+    
+    ;
 
   }
 

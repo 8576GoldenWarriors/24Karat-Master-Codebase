@@ -17,9 +17,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
-  private CANSparkMax rollerMotor;
+  //private CANSparkMax rollerMotor;
   private CANSparkMax armMotor;
-  private DigitalInput intakeSensor;
+ 
   //private Encoder armEncoder;
   private DutyCycleEncoder armEncoder;
 
@@ -30,10 +30,10 @@ public class Intake extends SubsystemBase {
     
 
 
-    rollerMotor = new CANSparkMax(Constants.IntakeConstants.rollerCANSparkID, MotorType.kBrushless);
+    //rollerMotor = new CANSparkMax(Constants.IntakeConstants.rollerCANSparkID, MotorType.kBrushless);
     armMotor = new CANSparkMax(Constants.IntakeConstants.pivotCANSparkID, MotorType.kBrushless);
 
-    intakeSensor = new DigitalInput(Constants.IntakeConstants.IntakeSensorID);
+    
     
 
 
@@ -41,7 +41,7 @@ public class Intake extends SubsystemBase {
     armEncoder.setPositionOffset(0.65);
     
 
-    rollerMotor.setIdleMode(IdleMode.kCoast);
+    //rollerMotor.setIdleMode(IdleMode.kCoast);
     armMotor.setIdleMode(IdleMode.kCoast);
 
     armMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 20);
@@ -49,17 +49,7 @@ public class Intake extends SubsystemBase {
 
   }
   
-  public void setRollerSpeed(double rollerSpeed) {
-    rollerMotor.set(rollerSpeed);
-  }
-
-  public void stopRollerSpeed() {
-    rollerMotor.set(0);
-  }
-
-  public double getRollerSpeed() {
-    return rollerMotor.get();
-  }
+  
 
   public void setArmSpeed(double armSpeed){
     armMotor.setSmartCurrentLimit(55); //check
@@ -76,27 +66,21 @@ public class Intake extends SubsystemBase {
     return armMotor.get();
   }
 
-  public RelativeEncoder getRollerEncoder() {
-    return rollerMotor.getEncoder();
-  }
+  // public RelativeEncoder getRollerEncoder() {
+  //   return rollerMotor.getEncoder();
+  // }
 
   public DutyCycleEncoder getArmEncoder() {
     //return armEncoder;
     return armEncoder;
   }
 
-  public DigitalInput getDigitalInput() {
-    return intakeSensor;
+
+  public void zeroEncoder(){
+    armEncoder.reset();
   }
 
-
-  public void SetCoast() {
-    rollerMotor.setIdleMode(IdleMode.kCoast);
-  }
-
-  public void setBrake() {
-    rollerMotor.setIdleMode(IdleMode.kBrake);
-  }
+  
 
   @Override
   public void periodic() {
@@ -104,7 +88,7 @@ public class Intake extends SubsystemBase {
     SmartDashboard.putBoolean("Arm Encoder Online: ", getArmEncoder().isConnected());
      SmartDashboard.putNumber("Arm Encoder Distance: ", getArmEncoder().getDistance());
      SmartDashboard.putNumber("Arm Encoder: ", getArmEncoder().getAbsolutePosition());
-    SmartDashboard.putBoolean("Arm Sensor Value", intakeSensor.get());
+    
 
   
   }

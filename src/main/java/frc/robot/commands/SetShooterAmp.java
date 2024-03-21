@@ -8,19 +8,23 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.ShooterRoller;
 
-public class SetShooterAngle extends Command {
+public class SetShooterAmp extends Command {
   PIDController controller;
   Shooter shooter;
+  ShooterRoller shooterRoller;
   double desiredAngle;
   /** Creates a new ShooterMid. */
-  public SetShooterAngle(Shooter shooter, double desiredAngle) {
+  public SetShooterAmp(Shooter shooter, double desiredAngle, ShooterRoller shooterRoller) {
     this.shooter = shooter;
     this.desiredAngle = desiredAngle;
+    this.shooterRoller = shooterRoller;
 
-    controller = new PIDController(5.0, 0, 0.001);
-    addRequirements(shooter);
+    controller = new PIDController(5.0, 0, 0.1);
+    addRequirements(shooter, shooterRoller);
   }
+  
 
   @Override
   public void initialize() {}
@@ -30,6 +34,7 @@ public class SetShooterAngle extends Command {
   public void execute() {
     double motorPower = controller.calculate(shooter.getAbsoluteDistance(), desiredAngle);
     shooter.setPivotSpeed(-motorPower);
+    shooterRoller.setSpeed(0.13);
     SmartDashboard.putNumber("Shooter PID Power", motorPower);
   }
 

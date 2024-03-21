@@ -4,33 +4,41 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Shooter;
 
-public class SetShooterAngle extends Command {
+public class FFShooterAngle extends Command {
   PIDController controller;
+  ArmFeedforward ffcontroller;
   Shooter shooter;
   double desiredAngle;
-  /** Creates a new ShooterMid. */
-  public SetShooterAngle(Shooter shooter, double desiredAngle) {
+  /** Creates a new FFShooterAngle. */
+  public FFShooterAngle(Shooter shooter, double desiredAngle) {
+
     this.shooter = shooter;
+
     this.desiredAngle = desiredAngle;
 
-    controller = new PIDController(5.0, 0, 0.001);
+    this.controller = new PIDController(5.0, 0, 0.1);
+
+    this.ffcontroller = new ArmFeedforward(0, 0.58, 2.53, 0.03); 
+
     addRequirements(shooter);
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double motorPower = controller.calculate(shooter.getAbsoluteDistance(), desiredAngle);
-    shooter.setPivotSpeed(-motorPower);
-    SmartDashboard.putNumber("Shooter PID Power", motorPower);
+    double motorPower = (controller.calculate(shooter.getAbsoluteDistance(), desiredAngle) + ffcontroller.calculate(desiredAngle, 2));
+    shooter.getShooterMotor().setVoltage(-motorPower);
   }
 
   // Called once the command ends or is interrupted.

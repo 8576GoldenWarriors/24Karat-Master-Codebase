@@ -18,6 +18,9 @@ import frc.lib.drivers.PearadoxSparkMax;
 import frc.robot.Constants.SwerveConstants;
 
 public class SwerveModule extends SubsystemBase {
+private int turnMotorId;
+private int driveMotorId;
+
   private PearadoxSparkMax driveMotor;
   private PearadoxSparkMax turnMotor;
 
@@ -35,6 +38,9 @@ public class SwerveModule extends SubsystemBase {
     int absoluteEncoderId, double absoluteEncoderOffset) {
       this.absoluteEncoderOffset = absoluteEncoderOffset;
 
+      this.turnMotorId = turnMotorId;
+      this.driveMotorId = driveMotorId;
+
       driveMotor = new PearadoxSparkMax(driveMotorId, MotorType.kBrushless, IdleMode.kCoast, 45, driveMotorReversed);
       turnMotor = new PearadoxSparkMax(turnMotorId, MotorType.kBrushless, IdleMode.kCoast, 25, turnMotorReversed);
 
@@ -43,7 +49,7 @@ public class SwerveModule extends SubsystemBase {
 
       absoluteEncoder = new CANcoder(absoluteEncoderId);
 
-      turnPIDController = new PIDController(SwerveConstants.KP_TURNING, 0, 0);
+      turnPIDController = new PIDController(SwerveConstants.KP_TURNING, 0, 0.001);
       turnPIDController.enableContinuousInput(-Math.PI, Math.PI);
 
       resetEncoders();
@@ -54,7 +60,9 @@ public class SwerveModule extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-  }
+    SmartDashboard.putNumber(turnMotorId+"", turnMotor.getEncoder().getPosition());
+    SmartDashboard.putNumber(driveMotorId+" Current: ", driveMotor.getOutputCurrent() );
+  } 
 
   public void setBrake(boolean brake){
     if(brake){

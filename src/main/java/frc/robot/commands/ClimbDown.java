@@ -38,15 +38,12 @@ public class ClimbDown extends Command {
   @Override
   public void end(boolean interrupted) {
     climber.setSpeed(0.0);
+    //climber.setRainbowBoolean(false);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-
-    // if(climber.getLeftMotorVoltage()>11.5 || climber.getRightMotorVoltage()>11.5){
-    //   return true;
-    // }
     return false;
   }
 }

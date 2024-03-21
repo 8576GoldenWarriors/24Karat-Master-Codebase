@@ -15,8 +15,8 @@ public class IntakeDown extends Command {
   private Intake intake;
   private DutyCycleEncoder encoder;
 
-  private TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(6.75, 3.55);
-  private ProfiledPIDController controller = new ProfiledPIDController(.75, 0.0, 0.2, constraints);
+  private TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(4.75, 3.55);
+  private ProfiledPIDController controller = new ProfiledPIDController(.7, 0.0, 0.01, constraints);
 
   // double setpoint;
   // double kP;

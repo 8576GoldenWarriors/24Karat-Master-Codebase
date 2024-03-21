@@ -7,17 +7,19 @@ package frc.robot.commands;
 import edu.wpi.first.math.controller.BangBangController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.ShooterRoller;
 
 public class Shoot extends Command {
-  public Shooter Shooter;
+  public ShooterRoller shooter;
   /** Creates a new Shoot. */
 
   public BangBangController controller = new BangBangController();
 
-  public Shoot(Shooter Shooter) {
-    this.Shooter = Shooter;
+  public Shoot(ShooterRoller Shooter) {
+    this.shooter = Shooter;
 
     addRequirements(Shooter);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -30,20 +32,25 @@ public class Shoot extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Shooter.setSpeed(Constants.ShooterConstants.kShooterSpeed);
+    if(!RobotContainer.operatorController.getHID().getLeftBumper()){
+      shooter.setSpeed(Constants.ShooterConstants.kShooterSpeed);
+    }
+    else{
+      shooter.setSpeed(0);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Shooter.setSpeed(0);
+    shooter.setSpeed(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     
-    return (RobotContainer.operatorController.getHID().getBButtonPressed()) ? true : false;
+    return (RobotContainer.operatorController.getHID().getBButtonPressed() && !RobotContainer.operatorController.getHID().getLeftBumper()) ? true : false;
 
   }
 }
