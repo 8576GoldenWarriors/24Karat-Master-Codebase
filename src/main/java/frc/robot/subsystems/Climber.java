@@ -92,6 +92,8 @@ public class Climber extends SubsystemBase {
     //SmartDashboard.putNumber("AVERAGE CLIMBER VOLTAGE: ", (getLeftMotorVoltage()+getRightMotorVoltage())/2);
     SmartDashboard.putNumber("Left Climb Encoder", getLeftEncoder().getPosition());
     SmartDashboard.putNumber("Right Climber Encoder: ", getRightEncoder().getPosition());
+    SmartDashboard.putNumber("Left Climber Current: ", getLeftCurrent());
+    SmartDashboard.putNumber("Right Climber Current: ", getRightCurrent());
     //This method will be called once per scheduler run
   }
 }

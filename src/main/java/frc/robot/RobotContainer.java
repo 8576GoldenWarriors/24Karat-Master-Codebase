@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Climb;
 import frc.robot.commands.ClimbDown;
+import frc.robot.commands.FFShooterAngle;
 import frc.robot.commands.IntakeDown;
 import frc.robot.commands.IntakeIn;
 import frc.robot.commands.IntakeOut;
@@ -156,9 +157,12 @@ public class RobotContainer {
     operatorController.leftBumper().and(operatorController.y()).whileTrue( new ShooterUp(m_Shooter));
     
 
-    operatorController.povLeft().onTrue(new SetShooterAngle(m_Shooter, 0.015));
-    operatorController.povUp().onTrue(new SetShooterAngle(m_Shooter, 0.07));
+    //operatorController.povLeft().onTrue(new SetShooterAngle(m_Shooter, 0.015));
+    //operatorController.povUp().onTrue(new SetShooterAngle(m_Shooter, 0.055));
     operatorController.povRight().onTrue(new SetShooterAmp(m_Shooter, 0.096, m_ShooterRoller));
+
+    operatorController.povLeft().onTrue(new FFShooterAngle(m_Shooter, 0.015));
+    operatorController.povUp().onTrue(new FFShooterAngle(m_Shooter, 0.055 ));
 
 
     
@@ -194,8 +198,10 @@ public class RobotContainer {
 
 
     //Intake Commands:
-    NamedCommands.registerCommand("IntakeUp", (new IntakeUp(m_Intake)));//new InstantCommand(() -> m_Intake.setArmSpeed(Constants.IntakeConstants.kArmUpSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(2))));;
-    NamedCommands.registerCommand("IntakeDown", (new IntakeDown(m_Intake)));//new InstantCommand(() -> m_Intake.setArmSpeed(Constants.IntakeConstants.kArmDownSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(3))));
+    NamedCommands.registerCommand("IntakeUp", (new IntakeUp(m_Intake)));
+    NamedCommands.registerCommand("ManualIntakeUp", (new InstantCommand(() -> m_Intake.setArmSpeed(Constants.IntakeConstants.kArmUpSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(2))));
+    NamedCommands.registerCommand("IntakeDown", (new IntakeDown(m_Intake)));
+    NamedCommands.registerCommand("ManualIntakeDown", (new InstantCommand(() -> m_Intake.setArmSpeed(Constants.IntakeConstants.kArmUpSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(2))));
     NamedCommands.registerCommand("IntakeOut", (new InstantCommand(() -> m_IntakeRoller.setRollerSpeed(-0.95))).deadlineWith(new InstantCommand(() ->  new WaitCommand(3))));
     NamedCommands.registerCommand("IntakeIn", (new InstantCommand(() -> m_IntakeRoller.setRollerSpeed(0.95))).deadlineWith(new InstantCommand(() ->  new WaitCommand(1.5))));
     NamedCommands.registerCommand("StopIntake", (new InstantCommand(() -> m_IntakeRoller.stopRollerSpeed())).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.2))));

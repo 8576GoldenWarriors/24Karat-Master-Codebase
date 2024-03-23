@@ -9,6 +9,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.ShooterRoller;
 
 public class FFShooterAngle extends Command {
   PIDController controller;
@@ -22,9 +23,9 @@ public class FFShooterAngle extends Command {
 
     this.desiredAngle = desiredAngle;
 
-    this.controller = new PIDController(5.0, 0, 0.1);
+    this.controller = new PIDController(0.5, 1.0, 0.001);
 
-    this.ffcontroller = new ArmFeedforward(0, 0.58, 2.53, 0.03); 
+    this.ffcontroller = new ArmFeedforward(0, 0.86, 1.95, 0.07); //old ks = 0, old kg = 0.58, old kv = 2.53, old ka = 0.03
 
     addRequirements(shooter);
     // Use addRequirements() here to declare subsystem dependencies.

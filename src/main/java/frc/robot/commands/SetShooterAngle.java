@@ -18,7 +18,9 @@ public class SetShooterAngle extends Command {
     this.shooter = shooter;
     this.desiredAngle = desiredAngle;
 
-    controller = new PIDController(5.0, 0, 0.001);
+    // controller = new PIDController(5, 15, 0.001); Baseline test
+    controller = new PIDController(3.0, 6.0, 0.001);
+
     addRequirements(shooter);
   }
 

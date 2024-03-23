@@ -21,7 +21,7 @@ public class SetShooterAmp extends Command {
     this.desiredAngle = desiredAngle;
     this.shooterRoller = shooterRoller;
 
-    controller = new PIDController(5.0, 0, 0.1);
+    controller = new PIDController(3.00, 6.00, 0.001);
     addRequirements(shooter, shooterRoller);
   }
   
@@ -34,7 +34,7 @@ public class SetShooterAmp extends Command {
   public void execute() {
     double motorPower = controller.calculate(shooter.getAbsoluteDistance(), desiredAngle);
     shooter.setPivotSpeed(-motorPower);
-    shooterRoller.setSpeed(0.13);
+    shooterRoller.setSpeed(0.14);
     SmartDashboard.putNumber("Shooter PID Power", motorPower);
   }
 
