@@ -147,9 +147,13 @@ public final class Constants {
 
     public static final int intakeEncoderPort = 1;
 
+    public static final int intakeEncoderA = 1;
+    public static final int intakeEncoderB = 2;
+    public static final int intakeEncoderI = 3;
+
     //COMPETITION ROLLERS AND ARM PIVOT
     public static final double kRollerInSpeed = 0.6;
-    public static final double kRollerOutSpeed = -0.6;
+    public static final double kRollerOutSpeed = -0.8;
 
     public static final double kArmUpSpeed = -0.65; 
     public static final double kArmDownSpeed = 0.5; 
@@ -166,8 +170,8 @@ public final class Constants {
 
 
     //IN ROTATIONS
-    public static final double kMaxArmAcceleration = 0.4;//1.05;
-    public static final double kMaxArmVelocity = 0.55;//1.5;
+    public static final double kMaxArmAcceleration = 2.75;//1.05;
+    public static final double kMaxArmVelocity = 3.55;//1.5;
 
     public static final double kP_armUp = 1.5;
     public static final double kP_armDown = 1.5;
@@ -182,7 +186,7 @@ public final class Constants {
     public static final int leftCANSparkID = 26;
     public static final int rightCANSparkID = 25;
 
-    public static final double kShooterSpeed = 0.70;
+    public static final double kShooterSpeed = 0.7;
     public static final double kShintakeSpeed = -0.1;
 
     public static final double kAmpSpeed = 0.13;

@@ -33,7 +33,7 @@ public class SetShooterAmp extends Command {
   @Override
   public void execute() {
     double motorPower = controller.calculate(shooter.getAbsoluteDistance(), desiredAngle);
-    shooter.setPivotSpeed(-motorPower);
+    shooter.setPivotSpeed(motorPower);
     shooterRoller.setSpeed(0.14);
     SmartDashboard.putNumber("Shooter PID Power", motorPower);
   }

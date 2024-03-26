@@ -15,8 +15,8 @@ public class IntakeDown extends Command {
   private Intake intake;
   private DutyCycleEncoder encoder;
 
-  private TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(4.75, 3.55);
-  private ProfiledPIDController controller = new ProfiledPIDController(.7, 0.0, 0.01, constraints);
+  private TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(8.75, 4.55);
+  private ProfiledPIDController controller = new ProfiledPIDController(.9, 0.09, 0.001, constraints);
 
   // double setpoint;
   // double kP;
@@ -31,9 +31,15 @@ public class IntakeDown extends Command {
 
   boolean done = false;
 
+  double encoderDistance;
+
+
   public IntakeDown(Intake intake) {
     this.intake = intake;
     this.encoder = intake.getArmEncoder();
+
+    encoderDistance = encoder.getDistance();
+
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intake);
@@ -64,14 +70,19 @@ public class IntakeDown extends Command {
       // if (encoder.getDistance() > 0.009 && encoder.getDistance() < 0.18){
       //   speed = speed * 15;
       // }
-      intake.setArmSpeed(controller.calculate(encoder.getDistance()));
+
+      if (encoderDistance <= 0){
+        encoderDistance = 0;
+      }
+
+      intake.setArmSpeed(controller.calculate(encoderDistance));
 
     //assume up is positive motor speed
     
     // if(!(Math.abs(error) > (Math.abs(Constants.IntakeConstants.kArmUpPosition) / 1.5))){
     //   done = true;
     // }
-    error = Constants.IntakeConstants.kArmUpPosition - encoder.getDistance();
+    error = Constants.IntakeConstants.kArmUpPosition - encoderDistance;
   }
 
   // Called once the command ends or is interrupted.
@@ -85,9 +96,7 @@ public class IntakeDown extends Command {
   public boolean isFinished() {
     if(done){
       return true;
-    }
-    
-    
+    }    
     return false;
   }
 }

@@ -26,7 +26,7 @@ public class ShooterRoller extends SubsystemBase {
 
   public void setSpeed(double speed){
     //ASSUMING RIGHT MOTOR NEEDS TO SPIN IN NEGATIVE DIRECTION
-    leftMotor.set(speed); //was negative
+   leftMotor.set(speed); //was negative
     rightMotor.set(speed);
   }
   public void stopShooter() {

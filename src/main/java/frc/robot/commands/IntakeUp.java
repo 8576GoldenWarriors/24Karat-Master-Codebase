@@ -17,7 +17,7 @@ public class IntakeUp extends Command {
   private DutyCycleEncoder encoder;
 
   private TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(Constants.IntakeConstants.kMaxArmVelocity, Constants.IntakeConstants.kMaxArmAcceleration);
-  private ProfiledPIDController controller = new ProfiledPIDController(.9, 0, 0.2, constraints);
+  private ProfiledPIDController controller = new ProfiledPIDController(.9, 0.09, 0.001, constraints);
 
   // double setpoint;
   // double kP;
@@ -32,9 +32,13 @@ public class IntakeUp extends Command {
 
   boolean done = false;
 
+  double encoderDistance;
+
   public IntakeUp(Intake intake) {
     this.intake = intake;
     this.encoder = intake.getArmEncoder();
+
+    encoderDistance = encoder.getDistance();
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intake);
   }
@@ -59,9 +63,14 @@ public class IntakeUp extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
+    if (encoderDistance <= 0){
+      encoderDistance = 0;
+    }
+
    // intake.setArmSpeed(Constants.IntakeConstants.kArmUpSpeed);
     controller.setGoal(Constants.IntakeConstants.kArmUpPosition);
-    intake.setArmSpeed(controller.calculate(encoder.getDistance()));
+    intake.setArmSpeed(controller.calculate(encoderDistance));
 
   
    

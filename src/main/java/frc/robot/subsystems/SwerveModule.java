@@ -49,7 +49,7 @@ private int driveMotorId;
 
       absoluteEncoder = new CANcoder(absoluteEncoderId);
 
-      turnPIDController = new PIDController(SwerveConstants.KP_TURNING, 0, 0.001);
+      turnPIDController = new PIDController(SwerveConstants.KP_TURNING, 0, 0.001); //0.001);
       turnPIDController.enableContinuousInput(-Math.PI, Math.PI);
 
       resetEncoders();

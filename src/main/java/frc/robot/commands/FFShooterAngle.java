@@ -16,18 +16,21 @@ public class FFShooterAngle extends Command {
   ArmFeedforward ffcontroller;
   Shooter shooter;
   double desiredAngle;
+
   /** Creates a new FFShooterAngle. */
+
   public FFShooterAngle(Shooter shooter, double desiredAngle) {
 
     this.shooter = shooter;
 
     this.desiredAngle = desiredAngle;
 
-    this.controller = new PIDController(0.5, 1.0, 0.001);
+    this.controller = new PIDController(1.0, 0.1, 0.001);
 
-    this.ffcontroller = new ArmFeedforward(0, 0.86, 1.95, 0.07); //old ks = 0, old kg = 0.58, old kv = 2.53, old ka = 0.03
+    this.ffcontroller = new ArmFeedforward(0.09, 0.58, 2.53);//0.09, 0.86, 1.95, 0.07); //old ks = 0, old kg = 0.58, old kv = 2.53, old ka = 0.03
 
     addRequirements(shooter);
+
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -38,8 +41,11 @@ public class FFShooterAngle extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double motorPower = (controller.calculate(shooter.getAbsoluteDistance(), desiredAngle) + ffcontroller.calculate(desiredAngle, 2));
-    shooter.getShooterMotor().setVoltage(-motorPower);
+
+
+
+    double motorPower = (controller.calculate((shooter.getAbsoluteDistance()), (desiredAngle)) + ffcontroller.calculate(desiredAngle, 2));
+    shooter.getShooterMotor().setVoltage(motorPower);
   }
 
   // Called once the command ends or is interrupted.

@@ -98,7 +98,7 @@ public class RobotContainer {
       }
       else{
         if (m_Climber.getRainbowBoolean()){
-          ledStrip.usePattern(new RainbowLEDPattern(9, 7));
+          ledStrip.usePattern(new RainbowLEDPattern(5, 7));
         }
         else{
         //ledStrip.usePattern(new RainbowLEDPattern(8, 2));
@@ -149,20 +149,22 @@ public class RobotContainer {
     //Commented bindings match the documented bindings
     operatorController.leftBumper().and(operatorController.a()).whileTrue( new  OverrideIntakeDown(m_Intake));
     operatorController.leftBumper().and(operatorController.x()).whileTrue( new OverrideIntakeUp(m_Intake));
-    //operatorController.a().and(operatorController.leftBumper()).onTrue(new IntakeUp(m_Intake));
-    //operatorController.x().and(operatorController.leftBumper()).onTrue(new IntakeDown(m_Intake));
+    // operatorController.a().and(operatorController.leftBumper()).onTrue(new IntakeUp(m_Intake));
+    // operatorController.x().and(operatorController.leftBumper()).onTrue(new IntakeDown(m_Intake));
 
     //test code for shooter pivot
     operatorController.leftBumper().and(operatorController.b()).whileTrue( new ShooterDown(m_Shooter));
     operatorController.leftBumper().and(operatorController.y()).whileTrue( new ShooterUp(m_Shooter));
     
 
-    //operatorController.povLeft().onTrue(new SetShooterAngle(m_Shooter, 0.015));
-    //operatorController.povUp().onTrue(new SetShooterAngle(m_Shooter, 0.055));
+    operatorController.povLeft().onTrue(new SetShooterAngle(m_Shooter, 0.015));
+    operatorController.povUp().onTrue(new SetShooterAngle(m_Shooter, 0.055));
     operatorController.povRight().onTrue(new SetShooterAmp(m_Shooter, 0.096, m_ShooterRoller));
 
-    operatorController.povLeft().onTrue(new FFShooterAngle(m_Shooter, 0.015));
-    operatorController.povUp().onTrue(new FFShooterAngle(m_Shooter, 0.055 ));
+    //operatorController.povDown().onTrue(new NewShooterAngle(0.05, m_Shooter));
+
+    //operatorController.povLeft().onTrue(new FFShooterAngle(m_Shooter, 0.015));
+    operatorController.povDown().onTrue(new FFShooterAngle(m_Shooter, 0.055 ));
 
 
     

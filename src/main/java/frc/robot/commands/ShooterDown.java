@@ -25,7 +25,7 @@ public class ShooterDown extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.setPivotSpeed(Constants.ShooterConstants.kPivotDownSpeed);
+    shooter.setPivotSpeed(-Constants.ShooterConstants.kPivotDownSpeed);
   }
 
   // Called once the command ends or is interrupted.

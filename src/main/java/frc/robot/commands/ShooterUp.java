@@ -23,7 +23,7 @@ public class ShooterUp extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.setPivotSpeed(Constants.ShooterConstants.kPivotUpSpeed);
+    shooter.setPivotSpeed(-Constants.ShooterConstants.kPivotUpSpeed);
   }
 
   // Called once the command ends or is interrupted.

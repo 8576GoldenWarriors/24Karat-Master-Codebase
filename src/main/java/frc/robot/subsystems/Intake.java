@@ -12,6 +12,7 @@ import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -20,8 +21,9 @@ public class Intake extends SubsystemBase {
   //private CANSparkMax rollerMotor;
   private CANSparkMax armMotor;
  
-  //private Encoder armEncoder;
-  private DutyCycleEncoder armEncoder;
+  private Encoder armEncoder;
+  //private DutyCycleEncoder armEncoder;
+  //private Encoder armEncoder
 
 
 
@@ -30,15 +32,18 @@ public class Intake extends SubsystemBase {
     
 
 
-    //rollerMotor = new CANSparkMax(Constants.IntakeConstants.rollerCANSparkID, MotorType.kBrushless);
+  
     armMotor = new CANSparkMax(Constants.IntakeConstants.pivotCANSparkID, MotorType.kBrushless);
 
     
     
 
 
-    armEncoder = new DutyCycleEncoder(Constants.IntakeConstants.intakeEncoderPort);
-    armEncoder.setPositionOffset(0.65);
+    // armEncoder = new DutyCycleEncoder(Constants.IntakeConstants.intakeEncoderPort);
+    // armEncoder.setPositionOffset(0.75);
+
+    armEncoder = new Encoder(Constants.IntakeConstants.intakeEncoderA, 
+                            Constants.IntakeConstants.intakeEncoderB, Constants.IntakeConstants.intakeEncoderI);
     
 
     //rollerMotor.setIdleMode(IdleMode.kCoast);
@@ -70,7 +75,11 @@ public class Intake extends SubsystemBase {
   //   return rollerMotor.getEncoder();
   // }
 
-  public DutyCycleEncoder getArmEncoder() {
+  // public DutyCycleEncoder getArmEncoder() {
+  //   //return armEncoder;
+  //   return armEncoder;
+  // }
+  public Encoder getArmEncoder() {
     //return armEncoder;
     return armEncoder;
   }
@@ -85,9 +94,9 @@ public class Intake extends SubsystemBase {
   @Override
   public void periodic() {
     
-    SmartDashboard.putBoolean("Arm Encoder Online: ", getArmEncoder().isConnected());
+    //SmartDashboard.putBoolean("Arm Encoder Online: ", getArmEncoder().isConnected());
      SmartDashboard.putNumber("Arm Encoder Distance: ", getArmEncoder().getDistance());
-     SmartDashboard.putNumber("Arm Encoder: ", getArmEncoder().getAbsolutePosition());
+     //SmartDashboard.putNumber("Arm Encoder: ", getArmEncoder().getAbsolutePosition());
     
 
   

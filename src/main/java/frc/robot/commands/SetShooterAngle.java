@@ -19,7 +19,7 @@ public class SetShooterAngle extends Command {
     this.desiredAngle = desiredAngle;
 
     // controller = new PIDController(5, 15, 0.001); Baseline test
-    controller = new PIDController(3.0, 6.0, 0.001);
+    controller = new PIDController(3.0, 0.3, 0.001);
 
     addRequirements(shooter);
   }
@@ -31,7 +31,7 @@ public class SetShooterAngle extends Command {
   @Override
   public void execute() {
     double motorPower = controller.calculate(shooter.getAbsoluteDistance(), desiredAngle);
-    shooter.setPivotSpeed(-motorPower);
+    shooter.setPivotSpeed(motorPower);
     SmartDashboard.putNumber("Shooter PID Power", motorPower);
   }
 
