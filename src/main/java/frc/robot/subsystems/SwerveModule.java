@@ -60,8 +60,8 @@ private int driveMotorId;
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber(turnMotorId+"", turnMotor.getEncoder().getPosition());
-    SmartDashboard.putNumber(driveMotorId+" Current: ", driveMotor.getOutputCurrent() );
+    // SmartDashboard.putNumber(turnMotorId+"", turnMotor.getEncoder().getPosition());
+    // SmartDashboard.putNumber(driveMotorId+" Current: ", driveMotor.getOutputCurrent() );
   } 
 
   public void setBrake(boolean brake){
@@ -115,12 +115,12 @@ private int driveMotorId;
   }
 
   public void setDesiredState(SwerveModuleState desiredState){
-    SmartDashboard.putNumber("Pre-optimized", desiredState.speedMetersPerSecond);
+    //SmartDashboard.putNumber("Pre-optimized", desiredState.speedMetersPerSecond);
     desiredState = SwerveModuleState.optimize(desiredState, getState().angle);
-    SmartDashboard.putNumber("Post-optimized", desiredState.speedMetersPerSecond); 
+    //SmartDashboard.putNumber("Post-optimized", desiredState.speedMetersPerSecond); 
     setAngle(desiredState);
     setSpeed(desiredState);
-    SmartDashboard.putString("Swerve [" + driveMotor.getDeviceId() + "] State", getState().toString());
+    //SmartDashboard.putString("Swerve [" + driveMotor.getDeviceId() + "] State", getState().toString());
   }
 
   public void setSpeed(SwerveModuleState desiredState){

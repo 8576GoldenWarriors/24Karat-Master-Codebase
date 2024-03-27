@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
@@ -14,10 +15,10 @@ import frc.robot.subsystems.Intake;
 public class IntakeUp extends Command {
   /** Creates a new IntakeUp. */
   private Intake intake;
-  private DutyCycleEncoder encoder;
+  private Encoder encoder;
 
-  private TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(Constants.IntakeConstants.kMaxArmVelocity, Constants.IntakeConstants.kMaxArmAcceleration);
-  private ProfiledPIDController controller = new ProfiledPIDController(.9, 0.09, 0.001, constraints);
+  private TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(5, 3);
+  private ProfiledPIDController controller = new ProfiledPIDController(.001, 0, 0, constraints);
 
   // double setpoint;
   // double kP;
@@ -46,6 +47,7 @@ public class IntakeUp extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    done = false;
     // setpoint = Constants.IntakeConstants.kUpPosition;
     // kP = 0.07;
     // Ki = 0;
@@ -64,19 +66,22 @@ public class IntakeUp extends Command {
   @Override
   public void execute() {
 
-    if (encoderDistance <= 0){
-      encoderDistance = 0;
-    }
+    // if (encoderDistance <= 0){
+    //   encoderDistance = 0;
+    // }
 
    // intake.setArmSpeed(Constants.IntakeConstants.kArmUpSpeed);
     controller.setGoal(Constants.IntakeConstants.kArmUpPosition);
-    intake.setArmSpeed(controller.calculate(encoderDistance));
+    intake.setArmSpeed(controller.calculate(Math.abs(encoder.getDistance())));
 
   
    
     // if(!(Math.abs(error) > (Math.abs(Constants.IntakeConstants.kArmUpPosition) / 1.5))){
     //   done = true;
     // }
+    if (encoder.getDistance() > -20){
+      done = true;
+    }
   }
 
   // Called once the command ends or is interrupted.

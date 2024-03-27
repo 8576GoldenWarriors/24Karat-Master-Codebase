@@ -147,9 +147,9 @@ public final class Constants {
 
     public static final int intakeEncoderPort = 1;
 
-    public static final int intakeEncoderA = 1;
-    public static final int intakeEncoderB = 2;
-    public static final int intakeEncoderI = 3;
+    public static final int intakeEncoderA = 7;
+    public static final int intakeEncoderB = 8;
+    public static final int intakeEncoderI = 9;
 
     //COMPETITION ROLLERS AND ARM PIVOT
     public static final double kRollerInSpeed = 0.6;
@@ -165,8 +165,8 @@ public final class Constants {
     // public static final double kArmUpSpeed = 0.5;
     // public static final double kArmDownSpeed = -0.45;
 
-    public static final double kArmDownPosition = 0.6002;//0.602; //encoder resoltuion value
-    public static final double kArmUpPosition = 0.0; //encoder resolution value
+    public static final double kArmDownPosition = 1205;//0.6002;//0.602; //encoder resoltuion value
+    public static final double kArmUpPosition = 10;//0.00 //encoder resolution value
 
 
     //IN ROTATIONS

@@ -147,10 +147,10 @@ public class RobotContainer {
     
     //Arm
     //Commented bindings match the documented bindings
-    operatorController.leftBumper().and(operatorController.a()).whileTrue( new  OverrideIntakeDown(m_Intake));
-    operatorController.leftBumper().and(operatorController.x()).whileTrue( new OverrideIntakeUp(m_Intake));
-    // operatorController.a().and(operatorController.leftBumper()).onTrue(new IntakeUp(m_Intake));
-    // operatorController.x().and(operatorController.leftBumper()).onTrue(new IntakeDown(m_Intake));
+    // operatorController.leftBumper().and(operatorController.a()).whileTrue( new  OverrideIntakeDown(m_Intake));
+    // operatorController.leftBumper().and(operatorController.x()).whileTrue( new OverrideIntakeUp(m_Intake));
+    operatorController.a().and(operatorController.leftBumper()).onTrue(new IntakeUp(m_Intake));
+    operatorController.x().and(operatorController.leftBumper()).onTrue(new IntakeDown(m_Intake));
 
     //test code for shooter pivot
     operatorController.leftBumper().and(operatorController.b()).whileTrue( new ShooterDown(m_Shooter));
