@@ -33,7 +33,7 @@ public class Climb extends Command {
    
     climber.setSpeed(Constants.ClimberConstants.kClimberSpeed);
 
-    if (climber.getLeftCurrent() >= 50 || climber.getRightCurrent() >= 50 ) {
+    if (climber.getLeftCurrent() >= 45 || climber.getRightCurrent() >= 45 ) {
 
       climber.setSpeed(0);
 

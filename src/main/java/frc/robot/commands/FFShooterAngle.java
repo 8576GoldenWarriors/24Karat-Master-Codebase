@@ -25,9 +25,9 @@ public class FFShooterAngle extends Command {
 
     this.desiredAngle = desiredAngle;
 
-    this.controller = new PIDController(1.0, 0.1, 0.001);
+    this.controller = new PIDController(6.0, 2.0, 0.001);
 
-    this.ffcontroller = new ArmFeedforward(0.09, 0.58, 2.53);//0.09, 0.86, 1.95, 0.07); //old ks = 0, old kg = 0.58, old kv = 2.53, old ka = 0.03
+    this.ffcontroller = new ArmFeedforward(0, 0.15, 0.15, 0); //old ks = 0, old kg = 0.58, old kv = 2.53, old ka = 0.03
 
     addRequirements(shooter);
 
@@ -44,8 +44,12 @@ public class FFShooterAngle extends Command {
 
 
 
-    double motorPower = (controller.calculate((shooter.getAbsoluteDistance()), (desiredAngle)) + ffcontroller.calculate(desiredAngle, 2));
-    shooter.getShooterMotor().setVoltage(motorPower);
+    double motorPower = (controller.calculate((shooter.getAbsoluteDistance()), (desiredAngle)));// + (ffcontroller.calculate(desiredAngle, 2)) / 14);
+    System.out.println(motorPower);
+    shooter.getShooterMotor().set(motorPower);
+
+    //SmartDashboard.putNumber("Feed Forward: ", (ffcontroller.calculate(desiredAngle, 2)) / 14);
+
   }
 
   // Called once the command ends or is interrupted.

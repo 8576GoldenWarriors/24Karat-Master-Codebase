@@ -164,7 +164,7 @@ public class RobotContainer {
     //operatorController.povDown().onTrue(new NewShooterAngle(0.05, m_Shooter));
 
     //operatorController.povLeft().onTrue(new FFShooterAngle(m_Shooter, 0.015));
-    operatorController.povDown().onTrue(new FFShooterAngle(m_Shooter, 0.055 ));
+    operatorController.povDown().onTrue(new FFShooterAngle(m_Shooter, 0.055));
 
 
     

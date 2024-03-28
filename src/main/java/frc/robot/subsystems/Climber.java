@@ -43,7 +43,7 @@ public class Climber extends SubsystemBase {
     // rightMotor.setSmartCurrentLimit(15);
     // leftMotor.setSmartCurrentLimit(15);
     
-    leftMotor.set(speed);
+    //leftMotor.set(speed);
     rightMotor.set(-speed);
 
     rainbowBoolean = true;
@@ -94,6 +94,9 @@ public class Climber extends SubsystemBase {
     SmartDashboard.putNumber("Right Climber Encoder: ", getRightEncoder().getPosition());
     SmartDashboard.putNumber("Left Climber Current: ", getLeftCurrent());
     SmartDashboard.putNumber("Right Climber Current: ", getRightCurrent());
+    
+    SmartDashboard.putBoolean("Left Climber", getLeftCurrent() >= 50);
+    SmartDashboard.putBoolean("Right Climber", getRightCurrent() >= 50);
     //This method will be called once per scheduler run
   }
 }
