@@ -21,7 +21,7 @@ public class SetShooterAmp extends Command {
     this.desiredAngle = desiredAngle;
     this.shooterRoller = shooterRoller;
 
-    controller = new PIDController(3.00, 6.00, 0.001);
+    controller = new PIDController(3.00, 0.30, 0.001);
     addRequirements(shooter, shooterRoller);
   }
   

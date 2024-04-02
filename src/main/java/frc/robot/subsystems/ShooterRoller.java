@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -16,12 +17,17 @@ public class ShooterRoller extends SubsystemBase {
   /** Creates a new ShooterRoller. */
   private CANSparkMax leftMotor; 
   private CANSparkMax rightMotor;
+
+  private boolean revved;
   public ShooterRoller() {
     leftMotor = new CANSparkMax(Constants.ShooterConstants.leftCANSparkID, MotorType.kBrushless);
     rightMotor = new CANSparkMax(Constants.ShooterConstants.rightCANSparkID, MotorType.kBrushless);
 
     leftMotor.setIdleMode(IdleMode.kCoast);
     rightMotor.setIdleMode(IdleMode.kCoast);
+
+    revved = false;
+
   }
 
   public void setSpeed(double speed){
@@ -47,6 +53,20 @@ public class ShooterRoller extends SubsystemBase {
 
   public RelativeEncoder getRightEncoder() {
     return rightMotor.getEncoder();
+  }
+
+
+
+  public boolean isRevved(){
+    if(revved == true){
+      return true;
+    }
+
+    return false;
+  }
+
+  public void setRevved(boolean isRevved){
+    revved = isRevved;
   }
 
   @Override

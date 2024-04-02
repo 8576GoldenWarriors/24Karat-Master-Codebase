@@ -7,9 +7,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.util.Color8Bit;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.PhasingLEDPattern;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -42,8 +44,9 @@ public class Robot extends TimedRobot {
     // m_led.setData(m_ledBuffer);
 
     // m_led.start();
-
+    
     m_robotContainer = new RobotContainer();
+   
   }
 
   /**
@@ -82,6 +85,7 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
+     m_robotContainer.ledStrip.usePattern(new PhasingLEDPattern(new Color8Bit(255, 90, 0), 0.5));
     //RobotContainer.m_Climber.setCoast();
   }
 

@@ -1,0 +1,75 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.63,
+      "y": 4.45
+    },
+    "rotation": -60.74360679398925
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Blue - Spin Spin"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Blue - Spin Spin PT2"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.4
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "IntakeOut"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Blue - Spin Spin PT3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Blue - Spin Spin PT4"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Blue - Spin Spin PT5"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "State Autonomous Routines",
+  "choreoAuto": false
+}

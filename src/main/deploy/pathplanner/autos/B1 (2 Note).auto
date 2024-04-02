@@ -1,0 +1,49 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.6431097477579587,
+      "y": 6.630585568863446
+    },
+    "rotation": 57.68038349181981
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "ResetEncoders"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ResetHeading"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "IntakePIDReset"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "B1 - 2 Note - PT1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "B1 - 2 Note - PT2"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "State Autonomous Routines",
+  "choreoAuto": false
+}

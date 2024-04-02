@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.math.controller.BangBangController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -18,9 +19,12 @@ public class Shoot extends Command {
 
   public BangBangController controller = new BangBangController();
 
+  public Timer timer = new Timer();
+
   public Shoot(ShooterRoller Shooter) {
     this.shooter = Shooter;
 
+    timer.reset();
     addRequirements(Shooter);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -38,12 +42,18 @@ public class Shoot extends Command {
     else{
       shooter.setSpeed(0);
     }
+
+    if(timer.get()>1.5){
+      shooter.setRevved(true);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     shooter.setSpeed(0);
+
+    shooter.setRevved(false);
   }
 
   // Returns true when the command should end.

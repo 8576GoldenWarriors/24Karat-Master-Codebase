@@ -79,7 +79,7 @@ public class IntakeDown extends Command {
         encoderDistance = 0;
       }
 
-      motorPower = controller.calculate(Math.abs(encoderDistance));
+      motorPower = controller.calculate(Math.abs(encoder.getDistance()));
 
       System.out.println(motorPower);
 

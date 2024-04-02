@@ -4,24 +4,24 @@
     {
       "anchor": {
         "x": 2.23,
-        "y": 4.08
+        "y": 3.6
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.5114007151091242,
-        "y": 4.311854008323402
+        "x": 1.185791602352437,
+        "y": 3.61478126648561
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.290889197163011,
-        "y": 5.535354916863679
+        "x": 2.5,
+        "y": 6.2
       },
       "prevControl": {
-        "x": 1.0673882886227328,
-        "y": 5.574822688106915
+        "x": 1.7303784607569215,
+        "y": 6.190133057189192
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,14 +33,14 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 6.0,
-    "maxAcceleration": 4.5,
+    "maxAcceleration": 5.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
-    "rotateFast": false
+    "rotation": 38.008267703402076,
+    "rotateFast": true
   },
   "reversed": false,
   "folder": "State Autonomous Paths",

@@ -7,6 +7,7 @@ package frc.robot;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
+import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -56,7 +57,7 @@ public class RobotContainer {
   public static final ShooterRoller m_ShooterRoller = new ShooterRoller();
   public static final Climber m_Climber = new Climber();
 
-  private final LEDStrip ledStrip;
+  public final LEDStrip ledStrip;
  // public static final LED m_led = new LED(Constants.LEDConstants.LED_PORT1, Constants.LEDConstants.LedLength1);
 
  
@@ -72,7 +73,7 @@ public class RobotContainer {
 
   public RobotContainer() {
 
-    ledStrip = new PhyscialLEDStrip(9, 58);
+    ledStrip = new PhyscialLEDStrip(9, 30); //58
 
     registerNamedCommands();
 
@@ -93,19 +94,25 @@ public class RobotContainer {
       new InstantCommand(drivetrain::zeroHeading, drivetrain));
 
     ledStrip.setDefaultCommand(new RunCommand(() -> {
-      if (!m_IntakeRoller.getDigitalInput().get()){
+       if(m_ShooterRoller.isRevved() == true){
+          ledStrip.usePattern(new PhasingLEDPattern(new Color8Bit(107, 250, 255), 0.7));
+        }
+      else if (!m_IntakeRoller.getDigitalInput().get()){
         ledStrip.usePattern(new PhasingLEDPattern(new Color8Bit(44, 255,10), 0.5));
       }
-      else{
-        if (m_Climber.getRainbowBoolean()){
+      else if (m_Climber.getRainbowBoolean()){
           ledStrip.usePattern(new RainbowLEDPattern(5, 7));
         }
-        else{
+       
+      else if(RobotState.isDisabled()){
+          ledStrip.usePattern(new PhasingLEDPattern(new Color8Bit(255, 255, 0), 0.5));
+      }
+      else{
         //ledStrip.usePattern(new RainbowLEDPattern(8, 2));
         ledStrip.usePattern(new PhasingLEDPattern(new Color8Bit(255, 0, 0
         ), 0.5));
-        }
       }
+      
 
 
 
@@ -158,7 +165,7 @@ public class RobotContainer {
     
 
     operatorController.povLeft().onTrue(new SetShooterAngle(m_Shooter, 0.015));
-    operatorController.povUp().onTrue(new SetShooterAngle(m_Shooter, 0.055));
+    operatorController.povUp().onTrue(new SetShooterAngle(m_Shooter, 0.05375));
     operatorController.povRight().onTrue(new SetShooterAmp(m_Shooter, 0.096, m_ShooterRoller));
 
     //operatorController.povDown().onTrue(new NewShooterAngle(0.05, m_Shooter));
@@ -195,8 +202,8 @@ public class RobotContainer {
     NamedCommands.registerCommand("ShooterDown", (new SetShooterAngle(m_Shooter, 0)).deadlineWith(new WaitCommand(2)));//new SetShooterAngle(m_Shooter, 0.07)));//new InstantCommand(() -> m_Shooter.setPivotSpeed(Constants.ShooterConstants.kPivotUpSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.5))));
     NamedCommands.registerCommand("StopShooterPivot", (new InstantCommand(() -> m_Shooter.setPivotSpeed(0))).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.5))));
     NamedCommands.registerCommand("ResetEncoders", (new InstantCommand(() -> m_Shooter.zeroEncoder()).deadlineWith(new InstantCommand(() -> new WaitCommand(0.5)))));
-    NamedCommands.registerCommand("ShooterManualDown", (new InstantCommand(() -> m_Shooter.setPivotSpeed(0.4))).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.5))));
-    NamedCommands.registerCommand("ShooterManualUp", (new InstantCommand(() -> m_Shooter.setPivotSpeed(-0.4))).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.5))));
+    NamedCommands.registerCommand("ShooterManualDown", (new InstantCommand(() -> m_Shooter.setPivotSpeed(-0.4))).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.5))));
+    NamedCommands.registerCommand("ShooterManualUp", (new InstantCommand(() -> m_Shooter.setPivotSpeed(0.4))).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.5))));
 
 
     //Intake Commands:
