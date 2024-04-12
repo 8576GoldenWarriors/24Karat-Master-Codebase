@@ -5,27 +5,26 @@
 package frc.robot.commands;
 
 import edu.wpi.first.math.controller.BangBangController;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.ShooterRoller;
 
 public class Shoot extends Command {
-  public ShooterRoller shooter;
+  public ShooterRoller shooterRoller;
   /** Creates a new Shoot. */
 
   public BangBangController controller = new BangBangController();
 
-  public Timer timer = new Timer();
+  
 
-  public Shoot(ShooterRoller Shooter) {
-    this.shooter = Shooter;
+  public Shoot(ShooterRoller shooterRoller) {
+    this.shooterRoller = shooterRoller;
 
-    timer.reset();
-    addRequirements(Shooter);
+    shooterRoller.setRevved(true);
+
+    shooterRoller.setAmping(false);
+    addRequirements(shooterRoller);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -37,23 +36,23 @@ public class Shoot extends Command {
   @Override
   public void execute() {
     if(!RobotContainer.operatorController.getHID().getLeftBumper()){
-      shooter.setSpeed(Constants.ShooterConstants.kShooterSpeed);
+      shooterRoller.setSpeed(Constants.ShooterConstants.kShooterSpeed);
+      shooterRoller.setRevved(true);
     }
     else{
-      shooter.setSpeed(0);
+      shooterRoller.setSpeed(0);
+      shooterRoller.setRevved(false);
     }
 
-    if(timer.get()>1.5){
-      shooter.setRevved(true);
-    }
+    
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooter.setSpeed(0);
+    shooterRoller.setSpeed(0); //Sets the shooter to 0.2 as its idle mode instead of not moving at all.
 
-    shooter.setRevved(false);
+    shooterRoller.setRevved(false);
   }
 
   // Returns true when the command should end.

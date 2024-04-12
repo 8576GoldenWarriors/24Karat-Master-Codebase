@@ -9,7 +9,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -19,6 +19,8 @@ public class ShooterRoller extends SubsystemBase {
   private CANSparkMax rightMotor;
 
   private boolean revved;
+  private boolean amping;
+
   public ShooterRoller() {
     leftMotor = new CANSparkMax(Constants.ShooterConstants.leftCANSparkID, MotorType.kBrushless);
     rightMotor = new CANSparkMax(Constants.ShooterConstants.rightCANSparkID, MotorType.kBrushless);
@@ -27,12 +29,29 @@ public class ShooterRoller extends SubsystemBase {
     rightMotor.setIdleMode(IdleMode.kCoast);
 
     revved = false;
+    amping = false;
+
+
 
   }
 
   public void setSpeed(double speed){
+    // revved = true;
+    // if(amping){
+    //   amping = false;
+    // }
     //ASSUMING RIGHT MOTOR NEEDS TO SPIN IN NEGATIVE DIRECTION
    leftMotor.set(speed); //was negative
+    rightMotor.set(speed);
+  }
+  public void setLeft(double speed){
+    //ASSUMING RIGHT MOTOR NEEDS TO SPIN IN NEGATIVE DIRECTION
+   leftMotor.set(speed); //was negative
+    
+  }
+  public void setRight(double speed){
+    //ASSUMING RIGHT MOTOR NEEDS TO SPIN IN NEGATIVE DIRECTION
+   
     rightMotor.set(speed);
   }
   public void stopShooter() {
@@ -40,6 +59,7 @@ public class ShooterRoller extends SubsystemBase {
     leftMotor.set(0);
     rightMotor.set(0);
   }
+
   public double getLeftMotorVoltage(){
     return leftMotor.getBusVoltage();
   }
@@ -58,19 +78,33 @@ public class ShooterRoller extends SubsystemBase {
 
 
   public boolean isRevved(){
-    if(revved == true){
-      return true;
-    }
+    return revved;
+  }
 
-    return false;
+  public boolean isAmping(){
+    return amping;
   }
 
   public void setRevved(boolean isRevved){
     revved = isRevved;
+    if(amping){
+      amping = false;
+    }
+  }
+
+  public void setAmping(boolean isAmping){
+    amping = isAmping;
+    if(revved){
+      revved = false;
+    }
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Top Shooter Module Current: ", getRightMotorVoltage());
+    SmartDashboard.putNumber("Bottom Shooter Module Current: ", getLeftMotorVoltage());
+    
+
   }
 }

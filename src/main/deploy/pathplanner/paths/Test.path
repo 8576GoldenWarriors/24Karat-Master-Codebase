@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.1,
-        "y": 5.35
+        "x": 0.465504777163402,
+        "y": 2.1904613039995318
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.0639495125144114,
-        "y": 5.30841523221508
+        "x": 3.6327934194329945,
+        "y": 2.50620347394541
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.7941032805142547,
-        "y": 3.6211680115667924
+        "x": 7.096090346026848,
+        "y": 4.213184580215315
       },
       "prevControl": {
-        "x": 2.7349016236494026,
-        "y": 3.6014341259451754
+        "x": 7.027021746351186,
+        "y": 5.426818545944784
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,21 +32,21 @@
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 6.0,
-    "maxAcceleration": 4.5,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": 179.23610153907003,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "World Autonomous Paths",
   "previewStartingState": {
-    "rotation": 35.92678306633106,
+    "rotation": 0,
     "velocity": 0
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

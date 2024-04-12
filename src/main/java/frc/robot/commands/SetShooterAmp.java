@@ -22,6 +22,11 @@ public class SetShooterAmp extends Command {
     this.shooterRoller = shooterRoller;
 
     controller = new PIDController(3.00, 0.30, 0.001);
+
+    shooterRoller.setAmping(true);
+
+    shooterRoller.setRevved(false);
+
     addRequirements(shooter, shooterRoller);
   }
   
@@ -34,7 +39,9 @@ public class SetShooterAmp extends Command {
   public void execute() {
     double motorPower = controller.calculate(shooter.getAbsoluteDistance(), desiredAngle);
     shooter.setPivotSpeed(motorPower);
-    shooterRoller.setSpeed(0.14);
+    shooterRoller.setLeft(.15);//bottom
+    shooterRoller.setRight(.13);//top
+    shooterRoller.setAmping(true);
     SmartDashboard.putNumber("Shooter PID Power", motorPower);
   }
 
@@ -42,12 +49,15 @@ public class SetShooterAmp extends Command {
   @Override
   public void end(boolean interrupted) {
     shooter.setPivotSpeed(0);
+    shooterRoller.setAmping(false);
+    shooterRoller.setSpeed(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     if(Math.abs(shooter.getShooterEncoder().getDistance()-desiredAngle)<0.01 || Math.abs(shooter.getShooterEncoder().getDistance())>0.13){
+      shooterRoller.setAmping(false);
       return true;
     }
     return false;

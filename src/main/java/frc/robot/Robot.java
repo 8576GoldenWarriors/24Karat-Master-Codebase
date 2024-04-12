@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.AddressableLED;
-import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.util.Color8Bit;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -128,6 +126,8 @@ public class Robot extends TimedRobot {
     drivetrain.setAllIdleMode(true);
 
     RobotContainer.m_Shooter.zeroEncoder();
+
+    //RobotContainer.m_ShooterRoller.setSpeed(0.2);
   }
 
   /** This function is called periodically during operator control. */

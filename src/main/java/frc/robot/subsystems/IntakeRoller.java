@@ -29,6 +29,7 @@ public class IntakeRoller extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putBoolean("Note Sensor Value", intakeSensor.get());
+   
     // This method will be called once per scheduler run
   }
 

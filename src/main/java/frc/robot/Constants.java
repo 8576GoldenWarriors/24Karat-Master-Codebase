@@ -89,12 +89,12 @@ public final class Constants {
     // public static  double RIGHT_BACK_OFFSET = 0.731201;
 
     //COMP OFFSETS
-    public static  double LEFT_FRONT_OFFSET = 0.719971;	
-    public static  double RIGHT_FRONT_OFFSET = 0.803467;//0.817383;
-    public static  double LEFT_BACK_OFFSET = 0.454102;//0.455322;//0.418945;//0.490967;//0.519043;
-    public static  double RIGHT_BACK_OFFSET = 0.510498;//0.504883;//0.013916; 
+    public static  double LEFT_FRONT_OFFSET = 0.219482;//0.725098;//0.719971;	
+    public static  double RIGHT_FRONT_OFFSET = 0.302002;//0.817383;
+    public static  double LEFT_BACK_OFFSET = 0.852783;///0.868408;//0.882324;//0.891113;//0.911377;//0.895752;//0.924316;//0.448730;//0.455322;//0.418945;//0.490967;//0.519043;
+    public static  double RIGHT_BACK_OFFSET = 0.505127;//0.510498;//0.504883;//0.013916; 
 
-    public static final double WHEEL_DIAMETER = Units.inchesToMeters(4.0); //originally 4 in template
+    public static final double WHEEL_DIAMETER = Units.inchesToMeters(4.00); //originally 4 in template
     public static final double DRIVE_MOTOR_GEAR_RATIO = 6.75;
     public static final double TURN_MOTOR_GEAR_RATIO = 150.0/7;
     public static final double DRIVE_MOTOR_PCONVERSION = WHEEL_DIAMETER * Math.PI / DRIVE_MOTOR_GEAR_RATIO;
@@ -103,7 +103,7 @@ public final class Constants {
     public static final double TURN_MOTOR_VCONVERSION = TURN_MOTOR_PCONVERSION / 60.0;
     public static final double KP_TURNING = 0.575;
 
-    public static final double DRIVETRAIN_MAX_SPEED = 7.5; //4.0, 4.75, 5.5
+    public static final double DRIVETRAIN_MAX_SPEED = 5.5; //4.0, 4.75, 5.5
     public static final double DRIVETRAIN_MAX_ANGULAR_SPEED = 5 * Math.PI; //3.5, 4.25, 5
 
     //Teleop constraints
@@ -112,8 +112,8 @@ public final class Constants {
     public static final double TELE_DRIVE_MAX_ACCELERATION = 7.5; //3
     public static final double TELE_DRIVE_MAX_ANGULAR_ACCELERATION = 15; //
 
-    public static final double AUTO_KP_TTANSLATION = 1.15;
-    public static final double AUTO_KP_ROTATIONAL = 0.1;
+    public static final double AUTO_KP_TTANSLATION = 1.35; //1.15
+    public static final double AUTO_KP_ROTATIONAL = 0.1; //0.1
 
     public static final double TRACK_WIDTH = Units.inchesToMeters(23.875);
     public static final double WHEEL_BASE = Units.inchesToMeters(23.875);
@@ -140,7 +140,7 @@ public final class Constants {
 
 
   public static class IntakeConstants{
-    public static final int IntakeSensorID = 4;
+    public static final int IntakeSensorID = 5;
 
     public static final int rollerCANSparkID = 15;
     public static final int pivotCANSparkID = 13;
@@ -152,8 +152,8 @@ public final class Constants {
     public static final int intakeEncoderI = 9;
 
     //COMPETITION ROLLERS AND ARM PIVOT
-    public static final double kRollerInSpeed = 0.6;
-    public static final double kRollerOutSpeed = -0.8;
+    public static final double kRollerInSpeed = 0.8;
+    public static final double kRollerOutSpeed = -0.5;
 
     public static final double kArmUpSpeed = -0.65; 
     public static final double kArmDownSpeed = 0.5; 
@@ -186,7 +186,7 @@ public final class Constants {
     public static final int leftCANSparkID = 26;
     public static final int rightCANSparkID = 25;
 
-    public static final double kShooterSpeed = 0.8;
+    public static final double kShooterSpeed = 0.65;
     public static final double kShintakeSpeed = -0.1;
 
     public static final double kAmpSpeed = 0.2;

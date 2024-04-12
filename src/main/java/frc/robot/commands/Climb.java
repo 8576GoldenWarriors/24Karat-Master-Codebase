@@ -4,7 +4,6 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
@@ -33,11 +32,11 @@ public class Climb extends Command {
    
     climber.setSpeed(Constants.ClimberConstants.kClimberSpeed);
 
-    if (climber.getLeftCurrent() >= 45 || climber.getRightCurrent() >= 45 ) {
+    /*if (climber.getLeftCurrent() >= 45 || climber.getRightCurrent() >= 45 ) {
 
       climber.setSpeed(0);
 
-    }
+    }*/
     
   }
 
