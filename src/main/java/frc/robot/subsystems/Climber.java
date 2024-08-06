@@ -90,10 +90,10 @@ public class Climber extends SubsystemBase {
   @Override
   public void periodic() {
     //SmartDashboard.putNumber("AVERAGE CLIMBER VOLTAGE: ", (getLeftMotorVoltage()+getRightMotorVoltage())/2);
-    SmartDashboard.putNumber("Left Climb Encoder", getLeftEncoder().getPosition());
+    /*SmartDashboard.putNumber("Left Climb Encoder", getLeftEncoder().getPosition());
     SmartDashboard.putNumber("Right Climber Encoder: ", getRightEncoder().getPosition());
     SmartDashboard.putNumber("Left Climber Current: ", getLeftCurrent());
-    SmartDashboard.putNumber("Right Climber Current: ", getRightCurrent());
+    SmartDashboard.putNumber("Right Climber Current: ", getRightCurrent());*/
     
     SmartDashboard.putBoolean("Left Climber", getLeftCurrent() >= 50);
     SmartDashboard.putBoolean("Right Climber", getRightCurrent() >= 50);

@@ -3,7 +3,7 @@
   "startingPose": {
     "position": {
       "x": 0.45563783435259325,
-      "y": 2.091791875891445
+      "y": 2.5
     },
     "rotation": 0
   },
@@ -20,12 +20,6 @@
         {
           "type": "named",
           "data": {
-            "name": "ResetEncoders"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
             "name": "IntakePIDReset"
           }
         },
@@ -33,6 +27,12 @@
           "type": "parallel",
           "data": {
             "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "ResetEncoders"
+                }
+              },
               {
                 "type": "path",
                 "data": {
@@ -46,7 +46,26 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 2.5
+                        "waitTime": 0.5
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ShooterManualDown"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 2.25
                       }
                     },
                     {
@@ -111,10 +130,16 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 1.0
+                  "waitTime": 1.5
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 60.0
           }
         },
         {

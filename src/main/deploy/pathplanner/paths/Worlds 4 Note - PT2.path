@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.465504777163402,
-        "y": 2.1904613039995318
+        "x": 2.75,
+        "y": 5.56
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.6327934194329945,
-        "y": 2.50620347394541
+        "x": 2.75,
+        "y": 6.56
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.096090346026848,
-        "y": 4.213184580215315
+        "x": 2.85,
+        "y": 7.0
       },
       "prevControl": {
-        "x": 7.027021746351186,
-        "y": 5.426818545944784
+        "x": 2.85,
+        "y": 6.264185763006022
       },
       "nextControl": null,
       "isLocked": false,
@@ -39,8 +39,8 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 179.23610153907003,
-    "rotateFast": false
+    "rotation": 90.0,
+    "rotateFast": true
   },
   "reversed": false,
   "folder": "World Autonomous Paths",

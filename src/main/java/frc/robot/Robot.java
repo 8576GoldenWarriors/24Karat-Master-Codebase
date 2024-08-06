@@ -4,7 +4,15 @@
 
 package frc.robot;
 
+// import edu.wpi.first.cameraserver.CameraServer;
+// import edu.wpi.first.cscore.UsbCamera;
+// import edu.wpi.first.cscore.VideoSource.ConnectionStrategy;
+// import edu.wpi.first.util.PixelFormat;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color8Bit;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -24,6 +32,8 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
+  //private UsbCamera camera;
+
 //   public static final AddressableLED m_led = new AddressableLED(Constants.LEDConstants.LED_PORT1);
 //  public static final AddressableLEDBuffer m_ledBuffer = new AddressableLEDBuffer(Constants.LEDConstants.LedLength1);
 
@@ -33,6 +43,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    /*camera = CameraServer.startAutomaticCapture(4);
+
+    camera.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
+
+    camera.setVideoMode(PixelFormat.kMJPEG, 240, 240, 20);*/
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     // m_led.setLength(Constants.LEDConstants.LedLength1);
@@ -75,6 +90,10 @@ public class Robot extends TimedRobot {
   //     }
   //  }
   //   m_led.setData(m_ledBuffer);
+
+    SmartDashboard.putNumber("Match Time", DriverStation.getMatchTime());
+
+    SmartDashboard.putNumber("Voltage", RobotController.getBatteryVoltage());
     
 
     CommandScheduler.getInstance().run();

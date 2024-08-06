@@ -19,6 +19,8 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -71,7 +73,7 @@ public class Drivetrain extends SubsystemBase {
   private SwerveModule rightFront = new SwerveModule(
     SwerveConstants.RIGHT_FRONT_DRIVE_ID, 
     SwerveConstants.RIGHT_FRONT_TURN_ID, 
-    true, //used to be true, might have to change back - Om: 2/14/24
+    false, //used to be true, might have to change back - Om: 2/14/24
     true, 
     SwerveConstants.RIGHT_FRONT_CANCODER_ID, 
     SwerveConstants.RIGHT_FRONT_OFFSET);
@@ -79,7 +81,7 @@ public class Drivetrain extends SubsystemBase {
   private SwerveModule leftBack = new SwerveModule(
     SwerveConstants.LEFT_BACK_DRIVE_ID, 
     SwerveConstants.LEFT_BACK_TURN_ID, 
-    true, 
+    false, 
     true, 
     SwerveConstants.LEFT_BACK_CANCODER_ID, 
     SwerveConstants.LEFT_BACK_OFFSET);
@@ -125,6 +127,27 @@ public class Drivetrain extends SubsystemBase {
       () -> isRedAlliance(),
       this
     );
+
+    SmartDashboard.putData("Swerve Drive", new Sendable() {
+      @Override
+      public void initSendable(SendableBuilder builder){
+        builder.setSmartDashboardType("SwerveDrive");
+
+        builder.addDoubleProperty("Front Left Angle", () -> leftFront.getTurnMotorPosition(), null);
+        builder.addDoubleProperty("Front Left Velocity", () -> leftFront.getDriveMotorVelocity(), null);
+
+        builder.addDoubleProperty("Front Right Angle", () -> rightFront.getTurnMotorPosition(), null);
+        builder.addDoubleProperty("Front Right Velocity", () -> rightFront.getDriveMotorVelocity(), null);
+
+        builder.addDoubleProperty("Back Left Angle", () -> leftBack.getTurnMotorPosition(), null);
+        builder.addDoubleProperty("Back Left Velocity", () -> leftBack.getDriveMotorVelocity(), null);
+
+        builder.addDoubleProperty("Back Right Angle", () -> rightBack.getTurnMotorPosition(), null);
+        builder.addDoubleProperty("Back Right Velocity", () -> rightBack.getDriveMotorVelocity(), null);
+
+        builder.addDoubleProperty("Robot Angle", () -> (getHeading() / 180 * Math.PI), null);
+      }
+    });
   }
 
   @Override
@@ -135,7 +158,7 @@ public class Drivetrain extends SubsystemBase {
     double yaw = gyro.getYaw().getValue();
     SmartDashboard.putNumber("Robot Angle", getHeading());
     //rates 2 is yaw (XYZ in order )
-    SmartDashboard.putString("Angular Speed", new DecimalFormat("#.00").format((yaw/ 180)) + "pi rad/s");
+    /*SmartDashboard.putString("Angular Speed", new DecimalFormat("#.00").format((yaw/ 180)) + "pi rad/s");
     // Logger.recordOutput("Robot Angle", getHeading());
     // Logger.recordOutput("Robot Pitch", getPitch());
     // Logger.recordOutput("Robot Roll", getRoll());
@@ -152,7 +175,28 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Left Front Module abs angle", leftFront.getAbsoluteEncoderAngle());
     SmartDashboard.putNumber("Right Front Module abs angle", rightFront.getAbsoluteEncoderAngle());
     SmartDashboard.putNumber("Left Back Module abs angle", leftBack.getAbsoluteEncoderAngle());
-    SmartDashboard.putNumber("Right Back Module abs angle", rightBack.getAbsoluteEncoderAngle());
+    SmartDashboard.putNumber("Right Back Module abs angle", rightBack.getAbsoluteEncoderAngle());*/
+
+    /*SmartDashboard.putData("Swerve Drive", new Sendable() {
+      @Override
+      public void initSendable(SendableBuilder builder){
+        builder.setSmartDashboardType("SwerveDrive");
+
+        builder.addDoubleProperty("Front Left Angle", () -> leftFront.getTurnMotorPosition(), null);
+        builder.addDoubleProperty("Front Left Velocity", () -> leftFront.getDriveMotorVelocity(), null);
+
+        builder.addDoubleProperty("Front Right Angle", () -> rightFront.getTurnMotorPosition(), null);
+        builder.addDoubleProperty("Front Right Velocity", () -> rightFront.getDriveMotorVelocity(), null);
+
+        builder.addDoubleProperty("Back Left Angle", () -> leftBack.getTurnMotorPosition(), null);
+        builder.addDoubleProperty("Back Left Velocity", () -> leftBack.getDriveMotorVelocity(), null);
+
+        builder.addDoubleProperty("Back Right Angle", () -> rightBack.getTurnMotorPosition(), null);
+        builder.addDoubleProperty("Back Right Velocity", () -> rightBack.getDriveMotorVelocity(), null);
+
+        builder.addDoubleProperty("Robot Angle", () -> getHeading(), null);
+      }
+    });// */
   
 
     // Logger.recordOutput("Drivetrain/Robot Angle", getHeadingRotation2d().getRadians());

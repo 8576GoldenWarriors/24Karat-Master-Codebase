@@ -53,4 +53,8 @@ public class IntakeRoller extends SubsystemBase {
   public DigitalInput getDigitalInput(){
     return intakeSensor;
   }
+
+  public boolean checkNote(){
+    return !intakeSensor.get();
+  }
 }

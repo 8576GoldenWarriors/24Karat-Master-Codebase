@@ -3,12 +3,14 @@
   "robotLength": 0.737,
   "holonomicMode": true,
   "pathFolders": [
-    "World Autonomous Paths",
-    "State Autonomous Paths"
+    "Worlds New",
+    "State Autonomous Paths",
+    "World Autonomous Paths"
   ],
   "autoFolders": [
-    "World Autonomous Routines",
-    "State Autonomous Routines"
+    "Worlds New",
+    "State Autonomous Routines",
+    "World Autonomous Routines"
   ],
   "defaultMaxVel": 3.0,
   "defaultMaxAccel": 3.0,

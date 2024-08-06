@@ -1,0 +1,82 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.48523866278501937,
+      "y": 2.249662960864383
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ResetHeading"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "IntakePIDReset"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ShooterManualDown"
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 1.0
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ResetEncoders"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "Midline Destroy - PT1"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "Midline Destroy - PT2"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "folder": "World Autonomous Routines",
+  "choreoAuto": false
+}

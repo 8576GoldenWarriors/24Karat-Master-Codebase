@@ -9,7 +9,10 @@ import com.pathplanner.lib.auto.NamedCommands;
 
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.RobotState;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -85,8 +88,13 @@ public class RobotContainer {
     drivetrain.setDefaultCommand(new SwerveDrive());
    //Add all the choise of Autonomous modes to the Smart Dashboard
     autoChooser = AutoBuilder.buildAutoChooser();
+
+
   
     SmartDashboard.putData("AutoChooser", autoChooser);
+
+    
+
   }
 
 
@@ -134,18 +142,50 @@ public class RobotContainer {
     // operatorController.a().whileTrue(new IntakeDown(m_Intake));//new SequentialCommandGroup(new IntakeIn(m_Intake), new IntakeUp(m_Intake), new Shoot(m_Shooter)));
     // operatorController.x().whileTrue(new IntakeUp(m_Intake));
 
+
+    //default
     operatorController.a().onTrue(new SequentialCommandGroup(
       new IntakeDown(m_Intake),
       new IntakeIn(m_IntakeRoller).until(() -> !m_IntakeRoller.getDigitalInput().get()), 
-      new IntakeIn(m_IntakeRoller).withTimeout(0.4), 
+      new IntakeIn(m_IntakeRoller).withTimeout(0.8), 
       new ParallelCommandGroup(
-        new InstantCommand(() -> m_ShooterRoller.setSpeed(0.65)),
+        new InstantCommand(() -> m_ShooterRoller.setSpeed(0.525)),
+        new InstantCommand(() -> m_ShooterRoller.setRevved(true)), 
+        new IntakeUp(m_Intake), 
+        new SetShooterAngle(m_Shooter, 0.045)))); //0.015
+
+
+     //High angle, same speed - Source to mid launch - assembly line pt1
+    operatorController.x().onTrue(new SequentialCommandGroup(
+      new IntakeDown(m_Intake),
+      new IntakeIn(m_IntakeRoller).until(() -> !m_IntakeRoller.getDigitalInput().get()), 
+      new IntakeIn(m_IntakeRoller).withTimeout(0.8), 
+      new ParallelCommandGroup(
+        new InstantCommand(() -> m_ShooterRoller.setSpeed(0.525)),
+        new InstantCommand(() -> m_ShooterRoller.setRevved(true)), 
+        new IntakeUp(m_Intake), 
+        new SetShooterAngle(m_Shooter, 0.058))));
+
+    //assembly line pt2
+    operatorController.y().onTrue(new SequentialCommandGroup(
+      new IntakeDown(m_Intake),
+      new IntakeIn(m_IntakeRoller).until(() -> !m_IntakeRoller.getDigitalInput().get()), 
+      new IntakeIn(m_IntakeRoller).withTimeout(0.8), 
+      new ParallelCommandGroup(
+        new InstantCommand(() -> m_ShooterRoller.setSpeed(0.4)),
         new InstantCommand(() -> m_ShooterRoller.setRevved(true)), 
         new IntakeUp(m_Intake), 
         new SetShooterAngle(m_Shooter, 0.015))));
 
+
+
     //operatorController.a().whileTrue(new IntakeIn(m_IntakeRoller));
-    operatorController.x().whileTrue(new IntakeIn(m_IntakeRoller));
+    //operatorController.x().whileTrue(new IntakeIn(m_IntakeRoller));
+
+    operatorController.y().and(operatorController.leftBumper()).whileTrue(new ShooterUp(m_Shooter));
+    operatorController.b().and(operatorController.leftBumper()).whileTrue(new ShooterDown(m_Shooter));
+
+    operatorController.b().onTrue(new InstantCommand(() -> m_ShooterRoller.setSpeed(0)));
 
 
     driverController.povDown().whileTrue(new OverrideIntakeUp(m_Intake));
@@ -153,7 +193,7 @@ public class RobotContainer {
 
     //Shooter
   
-    operatorController.y().onTrue(new Shoot(m_ShooterRoller)); //b button ends shoot command, defined in shoot command
+    //operatorController.y().onTrue(new Shoot(m_ShooterRoller)); //b button ends shoot command, defined in shoot command
     //Shintake
     // operatorController.povDown().whileTrue(new Shintake(m_Shooter));
     
@@ -179,15 +219,16 @@ public class RobotContainer {
     operatorController.x().and(operatorController.leftBumper()).onTrue(new IntakeDown(m_Intake));
 
     //test code for shooter pivot
-    operatorController.leftBumper().and(operatorController.b()).whileTrue( new ShooterDown(m_Shooter));
-    operatorController.leftBumper().and(operatorController.y()).whileTrue( new ShooterUp(m_Shooter));
+
+    operatorController.rightBumper().whileTrue(new IntakeIn(m_IntakeRoller));
+    
     
 
-    operatorController.povLeft().onTrue(new SetShooterAngle(m_Shooter, 0.015));
+    operatorController.povLeft().onTrue(new SetShooterAngle(m_Shooter, 0.015)); //0.015
     operatorController.povUp().onTrue(new SetShooterAngle(m_Shooter, 0.058));
     operatorController.povRight().onTrue(new SetShooterAmp(m_Shooter, 0.097, m_ShooterRoller));
 
-    //operatorController.povDown().onTrue(new NewShooterAngle(0.05, m_Shooter));
+    
 
     //operatorController.povLeft().onTrue(new FFShooterAngle(m_Shooter, 0.015));
     operatorController.povDown().onTrue(new FFShooterAngle(m_Shooter, 0.055));
@@ -217,7 +258,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("RunShooter", (new InstantCommand(() -> m_ShooterRoller.setSpeed(Constants.ShooterConstants.kShooterSpeed))));
     NamedCommands.registerCommand("StopShooter", (new InstantCommand(() -> m_ShooterRoller.stopShooter())).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.2))));
     NamedCommands.registerCommand("ShooterMiddle", (new SetShooterAngle(m_Shooter, .018)));//new InstantCommand(() -> m_Shooter.setPivotSpeed(Constants.ShooterConstants.kPivotDownSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.5))));
-    NamedCommands.registerCommand("ShooterUp", (new SetShooterAngle(m_Shooter, 0.07)).deadlineWith(new WaitCommand(2)));//new InstantCommand(() -> m_Shooter.setPivotSpeed(Constants.ShooterConstants.kPivotUpSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.5))));
+    NamedCommands.registerCommand("ShooterUp", (new SetShooterAngle(m_Shooter, 0.085)).deadlineWith(new WaitCommand(2)));//new InstantCommand(() -> m_Shooter.setPivotSpeed(Constants.ShooterConstants.kPivotUpSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.5))));
     NamedCommands.registerCommand("ShooterDown", (new SetShooterAngle(m_Shooter, 0)).deadlineWith(new WaitCommand(2)));//new SetShooterAngle(m_Shooter, 0.07)));//new InstantCommand(() -> m_Shooter.setPivotSpeed(Constants.ShooterConstants.kPivotUpSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.5))));
     NamedCommands.registerCommand("StopShooterPivot", (new InstantCommand(() -> m_Shooter.setPivotSpeed(0))).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.5))));
     NamedCommands.registerCommand("ResetEncoders", (new InstantCommand(() -> m_Shooter.zeroEncoder()).deadlineWith(new InstantCommand(() -> new WaitCommand(0.5)))));
@@ -240,9 +281,21 @@ public class RobotContainer {
     NamedCommands.registerCommand("MacroCommand", (new SequentialCommandGroup(
       new IntakeDown(m_Intake),
       new IntakeIn(m_IntakeRoller).until(() -> !m_IntakeRoller.getDigitalInput().get()), 
+      new IntakeIn(m_IntakeRoller).withTimeout(0.4),
       new ParallelCommandGroup(
         //new Shoot(m_ShooterRoller).until(() -> m_IntakeRoller.getDigitalInput().get()), 
         new IntakeUp(m_Intake), 
-        new SetShooterAngle(m_Shooter, 0.018)))));
+        new SetShooterAngle(m_Shooter, 0.016)))));
+    
+    NamedCommands.registerCommand("MacroCommandStage", (new SequentialCommandGroup(
+      new IntakeDown(m_Intake),
+      new IntakeIn(m_IntakeRoller).until(() -> !m_IntakeRoller.getDigitalInput().get()),
+      new IntakeIn(m_IntakeRoller).withTimeout(0.4), 
+      new ParallelCommandGroup(
+        //new Shoot(m_ShooterRoller).until(() -> m_IntakeRoller.getDigitalInput().get()), 
+        new IntakeUp(m_Intake), 
+        new SetShooterAngle(m_Shooter, 0.007)))));
+
+    NamedCommands.registerCommand("checkNote", new InstantCommand(() -> m_IntakeRoller.checkNote()));
   }
 }

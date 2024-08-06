@@ -45,7 +45,7 @@
   "reversed": false,
   "folder": "World Autonomous Paths",
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": -0.7485016387946093,
     "velocity": 0
   },
   "useDefaultConstraints": false
