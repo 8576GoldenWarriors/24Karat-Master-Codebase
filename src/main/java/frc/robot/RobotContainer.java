@@ -35,6 +35,7 @@ import frc.robot.commands.IntakeOut;
 import frc.robot.commands.IntakeUp;
 import frc.robot.commands.OverrideIntakeDown;
 import frc.robot.commands.OverrideIntakeUp;
+import frc.robot.commands.ReverseShoot;
 import frc.robot.commands.SetShooterAmp;
 import frc.robot.commands.SetShooterAngle;
 import frc.robot.commands.Shoot;
@@ -205,6 +206,7 @@ public class RobotContainer {
     driverController.a().whileTrue((new ClimbDown(m_Climber)));
 
     driverController.rightBumper().whileTrue(new IntakeOut(m_IntakeRoller));
+    
 
     driverController.button(7).onTrue(new InstantCommand(() -> m_Shooter.zeroEncoder()));
     // operatorController.start().whileTrue(new ClimbDown(m_Climber));
@@ -225,17 +227,17 @@ public class RobotContainer {
     
 
     operatorController.povLeft().onTrue(new SetShooterAngle(m_Shooter, 0.015)); //0.015
-    operatorController.povUp().onTrue(new SetShooterAngle(m_Shooter, 0.058));
+    operatorController.povUp().onTrue(new SetShooterAngle(m_Shooter, 0.0520)); //0.058
     operatorController.povRight().onTrue(new SetShooterAmp(m_Shooter, 0.097, m_ShooterRoller));
 
     
-
+    
     //operatorController.povLeft().onTrue(new FFShooterAngle(m_Shooter, 0.015));
     operatorController.povDown().onTrue(new FFShooterAngle(m_Shooter, 0.055));
 
+    //************************ */
 
-    
-     
+    driverController.leftBumper().whileTrue(new ParallelCommandGroup(new IntakeIn(m_IntakeRoller), new ReverseShoot(m_ShooterRoller)));
   }
 
 
@@ -258,7 +260,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("RunShooter", (new InstantCommand(() -> m_ShooterRoller.setSpeed(Constants.ShooterConstants.kShooterSpeed))));
     NamedCommands.registerCommand("StopShooter", (new InstantCommand(() -> m_ShooterRoller.stopShooter())).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.2))));
     NamedCommands.registerCommand("ShooterMiddle", (new SetShooterAngle(m_Shooter, .018)));//new InstantCommand(() -> m_Shooter.setPivotSpeed(Constants.ShooterConstants.kPivotDownSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.5))));
-    NamedCommands.registerCommand("ShooterUp", (new SetShooterAngle(m_Shooter, 0.085)).deadlineWith(new WaitCommand(2)));//new InstantCommand(() -> m_Shooter.setPivotSpeed(Constants.ShooterConstants.kPivotUpSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.5))));
+    NamedCommands.registerCommand("ShooterUp", (new SetShooterAngle(m_Shooter, 0.055)).deadlineWith(new WaitCommand(2)));//new InstantCommand(() -> m_Shooter.setPivotSpeed(Constants.ShooterConstants.kPivotUpSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.5))));
     NamedCommands.registerCommand("ShooterDown", (new SetShooterAngle(m_Shooter, 0)).deadlineWith(new WaitCommand(2)));//new SetShooterAngle(m_Shooter, 0.07)));//new InstantCommand(() -> m_Shooter.setPivotSpeed(Constants.ShooterConstants.kPivotUpSpeed))).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.5))));
     NamedCommands.registerCommand("StopShooterPivot", (new InstantCommand(() -> m_Shooter.setPivotSpeed(0))).deadlineWith(new InstantCommand(() ->  new WaitCommand(0.5))));
     NamedCommands.registerCommand("ResetEncoders", (new InstantCommand(() -> m_Shooter.zeroEncoder()).deadlineWith(new InstantCommand(() -> new WaitCommand(0.5)))));

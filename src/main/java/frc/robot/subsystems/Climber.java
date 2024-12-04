@@ -43,8 +43,8 @@ public class Climber extends SubsystemBase {
     // rightMotor.setSmartCurrentLimit(15);
     // leftMotor.setSmartCurrentLimit(15);
     
-    leftMotor.set(speed);
-    rightMotor.set(-speed);
+    leftMotor.set(-speed);
+    rightMotor.set(speed);
 
     rainbowBoolean = true;
 

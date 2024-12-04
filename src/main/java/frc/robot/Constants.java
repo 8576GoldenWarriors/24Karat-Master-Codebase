@@ -65,12 +65,12 @@ public final class Constants {
 
      public static final int LEFT_FRONT_DRIVE_ID = 7;
      public static final int RIGHT_FRONT_DRIVE_ID = 1;
-     public static final int LEFT_BACK_DRIVE_ID = 5; // 5
+     public static final int LEFT_BACK_DRIVE_ID = 4; // 5
      public static final int RIGHT_BACK_DRIVE_ID = 3; // 3
     
      public static final int LEFT_FRONT_TURN_ID = 6;
      public static final int RIGHT_FRONT_TURN_ID = 8;
-     public static  final int LEFT_BACK_TURN_ID = 4; // 4 
+     public static  final int LEFT_BACK_TURN_ID = 5; // 4 
      public static final int RIGHT_BACK_TURN_ID = 2; // 2
     
     public static final int LEFT_FRONT_CANCODER_ID = 3;
@@ -91,7 +91,7 @@ public final class Constants {
     //COMP OFFSETS
     public static  double LEFT_FRONT_OFFSET =0.205811;//0.206055; //0.222412;//0.213135;//0.216064;//0.721680;//0.732666;//0.292969;//0.723145;//0.717041;//0.717041;//0.710938 ;//0.725098;//0.719971;	
     public static  double RIGHT_FRONT_OFFSET = 0.798828;//0.301514;//0.799072;//0.302246;//0.306885;//0.792725;//0.712891;//0.817383;
-    public static  double LEFT_BACK_OFFSET = 0.5217290;//0.524902;//0.017334;//0.794189;//0.818115;//0.300781;//0.303711;//0.847412;//0.448730;//0.455322;//0.418945;//0.490967;//0.519043;
+    public static  double LEFT_BACK_OFFSET = 0.253662;//0.517090;//0.524902;//0.017334;//0.794189;//0.818115;//0.300781;//0.303711;//0.847412;//0.448730;//0.455322;//0.418945;//0.490967;//0.519043;
     public static  double RIGHT_BACK_OFFSET = 0.666748;//0.514160;//0.512451;//0.011475 ;//0.012451;//0.014404;//0.510498;//0.504883;//0.013916; 
 
     public static final double WHEEL_DIAMETER = Units.inchesToMeters(4.00); //originally 4 in template
@@ -107,7 +107,7 @@ public final class Constants {
     public static final double DRIVETRAIN_MAX_ANGULAR_SPEED = 5 * Math.PI; //3.5, 4.25, 5
 
     //Teleop constraints
-    public static final double TELE_DRIVE_MAX_SPEED = DRIVETRAIN_MAX_SPEED / 0.85;
+    public static final double TELE_DRIVE_MAX_SPEED = DRIVETRAIN_MAX_SPEED / 0.89; //0.85
     public static final double TELE_DRIVE_MAX_ANGULAR_SPEED = DRIVETRAIN_MAX_ANGULAR_SPEED / 1.75;
     public static final double TELE_DRIVE_MAX_ACCELERATION = 7.5; //3
     public static final double TELE_DRIVE_MAX_ANGULAR_ACCELERATION = 15; //

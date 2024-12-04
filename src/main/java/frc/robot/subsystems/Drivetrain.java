@@ -19,9 +19,12 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.networktables.StructArrayPublisher;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.SwerveConstants;
@@ -60,6 +63,11 @@ public class Drivetrain extends SubsystemBase {
   //   SwerveConstants.RIGHT_BACK_CANCODER_ID, 
   //   SwerveConstants.RIGHT_BACK_OFFSET);
 
+  //#@PN 11/28  Display robot pose on 2D and 3D layout in AdvantageScope
+  private Field2d m_Field2d;
+  
+  private final StructArrayPublisher<SwerveModuleState> m_ModuleStatePublisherIn;
+  private final StructArrayPublisher<SwerveModuleState> m_ModuleStatePublisherActual;
 
   //COMPETITIOM MODULES
    private SwerveModule leftFront = new SwerveModule(
@@ -81,7 +89,7 @@ public class Drivetrain extends SubsystemBase {
   private SwerveModule leftBack = new SwerveModule(
     SwerveConstants.LEFT_BACK_DRIVE_ID, 
     SwerveConstants.LEFT_BACK_TURN_ID, 
-    false, 
+    true, 
     true, 
     SwerveConstants.LEFT_BACK_CANCODER_ID, 
     SwerveConstants.LEFT_BACK_OFFSET);
@@ -110,6 +118,16 @@ public class Drivetrain extends SubsystemBase {
 
   /** Creates a new SwerveDrivetrain. */
   public Drivetrain() {
+
+      //#@PN 11/28
+    m_Field2d = new Field2d();
+    SmartDashboard.putData("GWR_Field", m_Field2d);
+        
+    m_ModuleStatePublisherIn = NetworkTableInstance.getDefault().getTable("24Karat").getStructArrayTopic("SwerveStates/In", SwerveModuleState.struct).publish();
+    m_ModuleStatePublisherActual = NetworkTableInstance.getDefault().getTable("24Karat").getStructArrayTopic("SwerveStates/Actual", SwerveModuleState.struct).publish();
+
+    System.out.println("--- Created GWRServeStates Topic --- ");
+
     new Thread(() -> {
       try{
         Thread.sleep(1000);
@@ -127,6 +145,7 @@ public class Drivetrain extends SubsystemBase {
       () -> isRedAlliance(),
       this
     );
+
 
     SmartDashboard.putData("Swerve Drive", new Sendable() {
       @Override
@@ -157,6 +176,13 @@ public class Drivetrain extends SubsystemBase {
     
     double yaw = gyro.getYaw().getValue();
     SmartDashboard.putNumber("Robot Angle", getHeading());
+
+    //#@PN 11/28
+    Pose2d curPose2d = odometry.update(getHeadingRotation2d(), getModulePositions());
+    m_Field2d.setRobotPose(curPose2d);
+
+    m_ModuleStatePublisherActual.set(getModuleStates());
+
     //rates 2 is yaw (XYZ in order )
     /*SmartDashboard.putString("Angular Speed", new DecimalFormat("#.00").format((yaw/ 180)) + "pi rad/s");
     // Logger.recordOutput("Robot Angle", getHeading());
@@ -204,16 +230,19 @@ public class Drivetrain extends SubsystemBase {
     // Logger.recordOutput("Drivetrain/Angular Speed", yaw / 180);
     // Logger.recordOutput("Drivetrain/Module States", getModuleStates());
 
-    odometry.update(getHeadingRotation2d(), getModulePositions());
+    
+
+     
+    
   }
 
   public void swerveDrive(double frontSpeed, double sideSpeed, double turnSpeed, 
     boolean fieldOriented, Translation2d centerOfRotation, boolean deadband){ 
       //Drive with rotational speed control w/ joystick
     if(deadband){
-      frontSpeed = Math.abs(frontSpeed) > 0.15 ? frontSpeed : 0;
-      sideSpeed = Math.abs(sideSpeed) > 0.15 ? sideSpeed : 0;
-      turnSpeed = Math.abs(turnSpeed) > 0.15 ? turnSpeed : 0;
+      frontSpeed = Math.abs(frontSpeed) > 0.0825 ? frontSpeed : 0;
+      sideSpeed = Math.abs(sideSpeed) > 0.0825 ? sideSpeed : 0;
+      turnSpeed = Math.abs(turnSpeed) > 0.0825 ? turnSpeed : 0;
     }
 
     frontSpeed = frontLimiter.calculate(frontSpeed) * SwerveConstants.TELE_DRIVE_MAX_SPEED;
@@ -231,6 +260,9 @@ public class Drivetrain extends SubsystemBase {
     SwerveModuleState[] moduleStates = SwerveConstants.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds, centerOfRotation);
 
     setModuleStates(moduleStates);
+
+    m_ModuleStatePublisherIn.set(getModuleStates());
+
   }
 
   public void setAllIdleMode(boolean brake){
