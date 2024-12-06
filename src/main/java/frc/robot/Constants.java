@@ -158,12 +158,7 @@ public final class Constants {
     public static final double kArmUpSpeed = -0.65; 
     public static final double kArmDownSpeed = 0.5; 
 
-    //PRACTICE ROLLER
-    // public static final double kRollerInSpeed = -0.50;
-    // public static final double kRollerOutSpeed = 0.65;
-    
-    // public static final double kArmUpSpeed = 0.5;
-    // public static final double kArmDownSpeed = -0.45;
+ 
 
     public static final double kArmDownPosition = 1205;//0.6002;//0.602; //encoder resoltuion value
     public static final double kArmUpPosition = 10;//0.00 //encoder resolution value
